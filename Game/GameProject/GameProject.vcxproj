@@ -22,6 +22,8 @@
     <ClCompile Include="source\ActorClass.cpp" />
     <ClCompile Include="source\AIControlClass.cpp" />
     <ClCompile Include="source\AIProcessComponent.cpp" />
+    <ClCompile Include="source\ApplicationGlobal.cpp" />
+    <ClCompile Include="source\ApplicationMain.cpp" />
     <ClCompile Include="source\AudienceComponent.cpp" />
     <ClCompile Include="source\BackLightClass.cpp" />
     <ClCompile Include="source\BackLightSpriteComponent.cpp" />
@@ -80,13 +82,14 @@
     <ClCompile Include="source\UIChipClass.cpp" />
     <ClCompile Include="source\UIFadeSpriteClass.cpp" />
     <ClCompile Include="source\UIMessageSpriteComponent.cpp" />
-    <ClCompile Include="source\winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\ActorClass.h" />
     <ClInclude Include="source\AIControlClass.h" />
     <ClInclude Include="source\AIProcessComponent.h" />
     <ClInclude Include="source\AIStruct.h" />
+    <ClInclude Include="source\ApplicationGlobal.h" />
+    <ClInclude Include="source\ApplicationMain.h" />
     <ClInclude Include="source\AudienceComponent.h" />
     <ClInclude Include="source\BackLightClass.h" />
     <ClInclude Include="source\BackLightSpriteComponent.h" />
@@ -148,7 +151,6 @@
     <ClInclude Include="source\UIChipClass.h" />
     <ClInclude Include="source\UIFadeSpriteClass.h" />
     <ClInclude Include="source\UIMessageSpriteComponent.h" />
-    <ClInclude Include="source\winmain.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -204,27 +206,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\AppFrame\source;$(SolutionDir)..\DxLib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\AppFrame\source;$(SolutionDir)..\DxLib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\AppFrame\source;$(SolutionDir)..\DxLib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)DxLib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\AppFrame\source;$(SolutionDir)..\DxLib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)DxLib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

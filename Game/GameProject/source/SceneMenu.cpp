@@ -106,7 +106,7 @@ void SceneMenu::Update() {
 
 				break;
 			default:
-				_Message = new UIChipClass(this,VGet(SCREEN_W/2,SCREEN_H/2,0), VGet(1, 1, 0),1, "res/UI/menu");
+				_Message = new UIChipClass(this,VGet(1920/2,1080/2,0), VGet(1, 1, 0),1, "res/UI/menu");
 				new UIMessageSpriteComponent(_Message);
 				break;
 			}

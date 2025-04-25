@@ -1,5 +1,4 @@
 #include "CameraClass.h"
-#include "winmain.h"
 #include "SceneBase.h"
 
 CameraClass::CameraClass(SceneBase* scene)
@@ -49,12 +48,12 @@ void CameraClass::UpdateActor()
 			
 			_Position.x = -tmpVadd.x / 2;
 			_Position.y = -tmpVadd.y / 2;// +VAdd(GetScene()->GetPlayer(0)->GetMove(), GetScene()->GetPlayer(1)->GetMove()).y / 2;
-			zoom = (float)SCREEN_W / (tmp + CAMERA_ADJ);
+			zoom = (float)1920 / (tmp + CAMERA_ADJ);
 		}
 
 		else if (GetScene()->GetFPSCon()->GetHitStop() > 5) {
 			//_Position.x = -tmpVadd.x / 2;
-			//zoom = (float)SCREEN_W / (tmp + CAMERA_ADJ);
+			//zoom = (float)1920 / (tmp + CAMERA_ADJ);
 			//zoom_max *= 1.2;
 		}
 		else{
@@ -69,7 +68,7 @@ void CameraClass::UpdateActor()
 			}
 			*/
 
-			_Move.z = ((float)SCREEN_W / (tmp + CAMERA_ADJ) - zoom) / FrameTime;
+			_Move.z = ((float)1920 / (tmp + CAMERA_ADJ) - zoom) / FrameTime;
 		}
 		//else { _Move.z = (1920.0f / (tmpVsub.x + tmpVsub.y + CAMERA_ADJ)-zoom) / FrameTime; }
 	}

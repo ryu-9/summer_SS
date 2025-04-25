@@ -95,7 +95,7 @@ void SceneDialogue::AfterInit() {
 	std::string path = "res/UI/dialogue/win/";
 	std::string num = std::to_string(GetCommonData()->_PlayerSelectChara[GetCommonData()->_WinnerPlayerNum - 1]);
 	_UIs.emplace_back(new UIChipClass(this, VGet(0, 0, 0), VGet(1, 1, 1), 0, (path + "back.png")));
-	_UIs.emplace_back(new UIChipClass(this, VGet(SCREEN_W/2,SCREEN_H/2, 0), VGet(1, 1, 1), 1, (path + "0" + num + ".png")));
+	_UIs.emplace_back(new UIChipClass(this, VGet(1920/2,1080/2, 0), VGet(1, 1, 1), 1, (path + "0" + num + ".png")));
 	_UIs.emplace_back(new UIChipClass(this, VGet(0, 0, 0), VGet(1, 1, 1), 0, (path + "winner.png")));
 	_UIs.emplace_back(new UIChipClass(this, VGet(60, 650, 0), VGet(1, 1, 1), 0, (path + "wordbox.png")));
 	if (_CommonData->_IsPractice) {

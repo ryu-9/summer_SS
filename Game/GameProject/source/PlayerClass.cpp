@@ -642,9 +642,9 @@ void PlayerClass::MotionUpdate()
 						if (GetFrame().type < 40000) {
 						VECTOR pos = VAdd(VScale(VAdd(player.hit[i].pos, _Position),1), VScale(VAdd(enemy.at[j].pos, GetScene()->GetPlayer(1 - _PlayerNo)->GetPosition()),0));
 					scene->GetEffectCon()->AddEffect(pos,type);
-					scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W/2, SCREEN_H/2, 0), 60);
+					scene->GetEffectCon()->AddScreenEffect(VGet(1920/2, 1080/2, 0), 60);
 					if (type != 1) { 
-						scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 60+type ); 
+						scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 60+type ); 
 						scene->GetEffectCon()->AddEffect(pos, type + 2);
 					}
 						}

@@ -1,7 +1,6 @@
 #pragma once
 #include "SceneBase.h"
 #include "gamepad.h"
-#include "winmain.h"
 #include "SoundItemSyncSystem.h"
 
 extern SoundManager sndManager;

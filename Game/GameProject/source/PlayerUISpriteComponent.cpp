@@ -12,7 +12,7 @@ PlayerUISpriteComponent::PlayerUISpriteComponent(class PlayerClass* owner, int d
 		DrawEnd = DrawStart + 560;
 	}
 	else {
-		DrawStart = SCREEN_W-311;
+		DrawStart = 1920-311;
 		DrawEnd = DrawStart - 560;
 	}
 
@@ -73,7 +73,7 @@ void PlayerUISpriteComponent::Draw()
 	int value = rand() % (_Player->GetVolume()+1);
 	value = 560 * value / 20;
 	SetDrawScreen(_Owner->GetScene()->GetScreenMask());
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255,255,255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255,255,255), TRUE);
 	if (_Player->GetPlayerNo() == FALSE) {
 		DrawGraph(DrawStart, DrawHeight, Mask, TRUE);
 		//////////DrawBox(1920 / 2, 0, tmp, 100, GetColor(255, 255, 255), TRUE);
@@ -130,7 +130,7 @@ void PlayerUISpriteComponent::Draw()
 		MATRIX rot = MGetRotZ(-Rotate / 180 * 4 * atan(1));
 		for (int i = 0; i < 4; i++) {
 			v[i] = VTransform(v[i], rot);
-			v[i] = VAdd(v[i], VGet(SCREEN_W + 103 - 200, 200 - 122, 0));
+			v[i] = VAdd(v[i], VGet(1920 + 103 - 200, 200 - 122, 0));
 
 		}
 		SetUseMaskScreenFlag(FALSE);

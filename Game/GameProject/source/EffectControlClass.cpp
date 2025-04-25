@@ -2008,7 +2008,7 @@ void EffectControlClass::AddScreenEffect(VECTOR pos, int type)
 		break;
 
 	case 16:					//フェードインエフェクト
-		size = VGet(SCREEN_W, SCREEN_H, 0);
+		size = VGet(1920, 1080, 0);
 		EffectCg.resize(Fade.size());
 		std::copy(Fade.begin(), Fade.end(), EffectCg.begin());
 		cgtime = 1500;
@@ -2017,7 +2017,7 @@ void EffectControlClass::AddScreenEffect(VECTOR pos, int type)
 		break;
 
 	case 17:					//フェードアウトエフェクト
-		size = VGet(SCREEN_W, SCREEN_H, 0);
+		size = VGet(1920, 1080, 0);
 		EffectCg.resize(Fade.size());
 		std::copy(Fade.begin(), Fade.end(), EffectCg.begin());
 		cgtime = 1500;
@@ -2044,7 +2044,7 @@ void EffectControlClass::AddScreenEffect(VECTOR pos, int type)
 
 
 	case 19:					//真っ黒
-		size = VGet(SCREEN_W, SCREEN_H, 0);
+		size = VGet(1920, 1080, 0);
 		EffectCg.resize(Fade.size());
 		std::copy(Fade.begin(), Fade.end(), EffectCg.begin());
 		cgtime = 1500;
@@ -2108,7 +2108,7 @@ void EffectControlClass::AddScreenEffect(VECTOR pos, int type)
 
 		break;
 	case 60:
-		size = VGet(SCREEN_W, SCREEN_H, 0);
+		size = VGet(1920, 1080, 0);
 		EffectCg.resize(ConceL.size());
 		std::copy(ConceL.begin(), ConceL.end(), EffectCg.begin());
 		cgtime = 500;
@@ -2119,7 +2119,7 @@ void EffectControlClass::AddScreenEffect(VECTOR pos, int type)
 	case 62:
 		rev = TRUE;
 		color = GetScene()->GetPlayer(0)->GetMyColor();
-		size = VGet(SCREEN_W, SCREEN_H, 0);
+		size = VGet(1920, 1080, 0);
 		EffectCg.resize(ConceL.size());
 		std::copy(ConceL.begin(), ConceL.end(), EffectCg.begin());
 		cgtime = 500;
@@ -2129,7 +2129,7 @@ void EffectControlClass::AddScreenEffect(VECTOR pos, int type)
 	case 63:
 		rev = TRUE;
 		color = GetScene()->GetPlayer(1)->GetMyColor();
-		size = VGet(SCREEN_W, SCREEN_H, 0);
+		size = VGet(1920, 1080, 0);
 		EffectCg.resize(ConceL.size());
 		std::copy(ConceL.begin(), ConceL.end(), EffectCg.begin());
 		cgtime = 500;

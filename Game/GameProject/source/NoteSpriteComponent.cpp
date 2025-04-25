@@ -23,14 +23,14 @@ NoteSpriteComponent::NoteSpriteComponent(ActorClass* owner, int drawOrder)
 	_Time[6] = LoadGraph("res/UI/gamemain/6 ñæ_éûä‘êßå¿ÉoÅ[.png");
 	auto scene = dynamic_cast<SceneMain*>(_Owner->GetScene());
 	if (scene != nullptr) {
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2 + 415, 0), 50);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2 + 490, 0), 50);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2+70, SCREEN_H / 2 + 430, 0), 51);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2+70, SCREEN_H / 2 + 490, 0), 51);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2-70, SCREEN_H / 2 + 430, 0), 52);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2-70, SCREEN_H / 2 + 490, 0), 52);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2 + 120, SCREEN_H / 2 + 370, 0), 53);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2 - 120, SCREEN_H / 2 + 370, 0), 54);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2 + 415, 0), 50);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2 + 490, 0), 50);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2+70, 1080 / 2 + 430, 0), 51);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2+70, 1080 / 2 + 490, 0), 51);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2-70, 1080 / 2 + 430, 0), 52);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2-70, 1080 / 2 + 490, 0), 52);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2 + 120, 1080 / 2 + 370, 0), 53);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2 - 120, 1080 / 2 + 370, 0), 54);
 
 	}
 }
@@ -46,12 +46,12 @@ void NoteSpriteComponent::Draw() {
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 	DrawGraph(0, 950, _Lane, TRUE);
 	DrawGraph(775, 910, _Point, TRUE);
-	DrawGraph(SCREEN_W - 775 - 140, 910, _Point, TRUE);
+	DrawGraph(1920 - 775 - 140, 910, _Point, TRUE);
 	if (CheckSoundMem(_RhythmCon->GetBGMHandle()) == FALSE) {
-		DrawGraph(SCREEN_W / 2 - 250, 29 + 130 - 40, _Time[0], TRUE);
+		DrawGraph(1920 / 2 - 250, 29 + 130 - 40, _Time[0], TRUE);
 	}
 
-	else { DrawGraph(SCREEN_W / 2 - 250, 29 + 130 - 40, _Time[(GetSoundCurrentTime(_RhythmCon->GetBGMHandle()) * 6 - 1)/GetSoundTotalTime(_RhythmCon->GetBGMHandle()) + 1], TRUE); }
+	else { DrawGraph(1920 / 2 - 250, 29 + 130 - 40, _Time[(GetSoundCurrentTime(_RhythmCon->GetBGMHandle()) * 6 - 1)/GetSoundTotalTime(_RhythmCon->GetBGMHandle()) + 1], TRUE); }
 
 	int tmp1 = GetSoundCurrentTime(_RhythmCon->GetBGMHandle());
 	int tmp2 = GetSoundTotalTime(_RhythmCon->GetBGMHandle());
@@ -74,10 +74,10 @@ void NoteSpriteComponent::Draw() {
 			DrawBox(_RhythmCon->GetInopTime(i, 0) + _DrawX, 1010 - _DrawY, _RhythmCon->GetInopTime(i, 1) + _DrawX, 1010 + _DrawY, GetColor(150, 150, 150), TRUE);
 		}
 		else {
-			DrawBox(SCREEN_W - (_RhythmCon->GetInopTime(i, 2) + _DrawX), 1010 - _DrawY, SCREEN_W - (_RhythmCon->GetInopTime(i, 0) + _DrawX), 1010 + _DrawY, GetColor(255, 255, 255), TRUE);
+			DrawBox(1920 - (_RhythmCon->GetInopTime(i, 2) + _DrawX), 1010 - _DrawY, 1920 - (_RhythmCon->GetInopTime(i, 0) + _DrawX), 1010 + _DrawY, GetColor(255, 255, 255), TRUE);
 
 			SetDrawBright(255, 255, 255);
-			DrawBox(SCREEN_W - (_RhythmCon->GetInopTime(i, 0) + _DrawX), 1010 - _DrawY, SCREEN_W - (_RhythmCon->GetInopTime(i, 1) + _DrawX), 1010 + _DrawY, GetColor(150, 150, 150), TRUE);
+			DrawBox(1920 - (_RhythmCon->GetInopTime(i, 0) + _DrawX), 1010 - _DrawY, 1920 - (_RhythmCon->GetInopTime(i, 1) + _DrawX), 1010 + _DrawY, GetColor(150, 150, 150), TRUE);
 		}
 
 		for (const auto& iter : nt[i]) {
@@ -120,10 +120,10 @@ void NoteSpriteComponent::Draw() {
 	SetDrawBright(255, 255, 255);
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
 		if (i == 0) {
-			DrawBox(_RhythmCon->GetInopTime(i ,1) + _DrawX, 1010 - _DrawY, SCREEN_W / 2, 1010 + _DrawY, GetColor(0,0,0), TRUE);
+			DrawBox(_RhythmCon->GetInopTime(i ,1) + _DrawX, 1010 - _DrawY, 1920 / 2, 1010 + _DrawY, GetColor(0,0,0), TRUE);
 		}
 		else {
-			DrawBox(1920 - (_RhythmCon->GetInopTime(i , 1) + _DrawX), 1010 - _DrawY, SCREEN_W / 2, 1010 + _DrawY, GetColor(0,0,0), TRUE);
+			DrawBox(1920 - (_RhythmCon->GetInopTime(i , 1) + _DrawX), 1010 - _DrawY, 1920 / 2, 1010 + _DrawY, GetColor(0,0,0), TRUE);
 		}
 		
 	}

@@ -102,9 +102,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\winmain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="source\gamepad.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -288,11 +285,14 @@
     <ClCompile Include="source\UIActionComponentBase.cpp">
       <Filter>ソース ファイル\Scene\OutGame\UI\Action</Filter>
     </ClCompile>
+    <ClCompile Include="source\ApplicationMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ApplicationGlobal.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\winmain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="source\gamepad.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -487,6 +487,12 @@
     </ClInclude>
     <ClInclude Include="source\UIActionComponentBase.h">
       <Filter>ヘッダー ファイル\Scene\OutGame\UI\action</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ApplicationMain.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ApplicationGlobal.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

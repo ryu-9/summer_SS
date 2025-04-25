@@ -1,5 +1,4 @@
 #include "SynopsisComponent.h"
-#include "winmain.h"
 #include "Main.h"
 
 SynopsisComponent::SynopsisComponent(ActorClass* owner, int updateOrder)

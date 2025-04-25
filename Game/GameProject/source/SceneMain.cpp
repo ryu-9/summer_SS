@@ -4,7 +4,6 @@
 #include "SceneBase.h"
 #include "RhythmControlClass.h"
 #include "Stage.h"
-#include "winmain.h"
 #include "MainSpriteComponent.h"
 #include "AIControlClass.h"
 
@@ -45,17 +44,17 @@ SceneMain::SceneMain(class Main* main)
 	_Tension = 100/2;
 	_Stage = new StageBase(this, VGet(0, GROUND_HEIGHT-115, 0), VGet(4200, 125, 1), "res/stage/light_land.png", 1, 0);
 	new StageBase(this, VGet(0, GROUND_HEIGHT + 825, 0), VGet(3600, 2000, 1), "res/stage/stage.png", 4, 90, 0, 180 / 4);
-	new StageBase(this, VGet(0, -SCREEN_H / 4, 0), VGet(SCREEN_W * 4, SCREEN_H * 4, 0), "res/stage/dark.png",1,110);
-	new StageBack(this, VGet(0, SCREEN_H / 4, 0), VGet(3840 * 2, SCREEN_H*2, 0), "res/stage/stage_back.png", 1.0f,50);
-	new StageBack(this, VGet(3840*2, SCREEN_H/4, 0), VGet(3840 * 2, SCREEN_H * 2, 0), "res/stage/stage_back.png", 1.0f, 50);
+	new StageBase(this, VGet(0, -1080 / 4, 0), VGet(1920 * 4, 1080 * 4, 0), "res/stage/dark.png",1,110);
+	new StageBack(this, VGet(0, 1080 / 4, 0), VGet(3840 * 2, 1080*2, 0), "res/stage/stage_back.png", 1.0f,50);
+	new StageBack(this, VGet(3840*2, 1080/4, 0), VGet(3840 * 2, 1080 * 2, 0), "res/stage/stage_back.png", 1.0f, 50);
 	new StageLight(this, VGet(-2000, GROUND_HEIGHT -3160 / 2, 0), VGet(1400 *  2 , 1500 * 2 , 0), "res/stage/STAGE_LIGHT.png", 7, 95);
 	new StageLight(this, VGet(2000, GROUND_HEIGHT - 3160 / 2, 0), VGet(1400 * 2, 1500 * 2, 0), "res/stage/STAGE_LIGHT.png", 7, 95);
 	new StageFire(this, VGet(2000, GROUND_HEIGHT - 100, 0), 0);
 	new StageFire(this, VGet(2000, GROUND_HEIGHT - 100, 0), 90);
 	new StageFire(this, VGet(2000, GROUND_HEIGHT - 100, 0), 180);
 	new StageFire(this, VGet(2000, GROUND_HEIGHT - 100, 0), 270);
-	ScreenMask = MakeScreen(SCREEN_W, SCREEN_H,TRUE);
-	SubMask = MakeScreen(SCREEN_W, SCREEN_H,TRUE);
+	ScreenMask = MakeScreen(1920, 1080,TRUE);
+	SubMask = MakeScreen(1920, 1080,TRUE);
 
 	_BackLight[0] = new BackLightClass(this, 0);
 	_BackLight[1] = new BackLightClass(this, 1);
@@ -63,7 +62,7 @@ SceneMain::SceneMain(class Main* main)
 	SetUseMaskScreenFlag(FALSE);		//‚¨Žç‚è
 
 
-	_EFControl->AddScreenEffect(VGet(SCREEN_W/2,SCREEN_H/2,0), 16);
+	_EFControl->AddScreenEffect(VGet(1920/2,1080/2,0), 16);
 	
 	sndManager.AddSound(new SoundItemSE("res/sound/se/FIRE.mp3", "fire"));
 	sndManager.AddSound(new SoundItemSE("res/sound/se/backlight.mp3", "backlight"));
@@ -93,7 +92,7 @@ void SceneMain::Init(){
 	_Player[1]->Init();
 	_Tension = 100/2;
 	_FinishFlag = FALSE;
-	//_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 1);
+	//_EFControl->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 1);
 	_SceneFlag = 1;
 	_Cnt = 0;
 	_Psy->Init();
@@ -147,17 +146,17 @@ void SceneMain::Update()
 		}
 		if (_Cnt+4000 < GetNowCount()) { 
 			if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() > _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 1000, SCREEN_H / 2, 0), 11);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 - 1000, 1080 / 2, 0), 11);
 				//1PŸ—˜
 			}
 			else if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() < _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 1000, SCREEN_H / 2, 0), 12);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 + 1000, 1080 / 2, 0), 12);
 				//1PŸ—˜
 			}
 			else {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 13);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 100, SCREEN_H / 2, 0), 14);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + 100, SCREEN_H / 2, 0), 15);
+				_EFControl->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 13);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 - 616 / 2 - 100, 1080 / 2, 0), 14);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 + 616 / 2 + 100, 1080 / 2, 0), 15);
 				//ˆø‚«•ª‚¯
 			}
 			_SceneFlag = 1;
@@ -210,17 +209,17 @@ void SceneMain::Update()
 		if (_Cnt == 0) { _Cnt = GetNowCount() + 2000;  }
 		if (GetNowCount()>_Cnt) {
 			if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() > _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 1000, SCREEN_H / 2, 0), 11);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 - 1000, 1080 / 2, 0), 11);
 				//1PŸ—˜
 			}
 			else if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() < _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 1000, SCREEN_H / 2, 0), 12);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 + 1000, 1080 / 2, 0), 12);
 				//1PŸ—˜
 			}
 			else {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 13);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 250, SCREEN_H / 2, 0), 14);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + 250, SCREEN_H / 2, 0), 15);
+				_EFControl->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 13);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 - 616 / 2 - 250, 1080 / 2, 0), 14);
+				_EFControl->AddScreenEffect(VGet(1920 / 2 + 616 / 2 + 250, 1080 / 2, 0), 15);
 				//ˆø‚«•ª‚¯
 			}
 			_SceneFlag = 1;
@@ -259,9 +258,9 @@ void SceneMain::Update()
 			//ˆø‚«•ª‚¯
 		}
 		_SceneFlag = sceneFlag;
-		_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 100, SCREEN_H / 2, 0), 6);
-		_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + 100, SCREEN_H / 2, 0), 7);
-		_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 8);
+		_EFControl->AddScreenEffect(VGet(1920 / 2 - 616 / 2 - 100, 1080 / 2, 0), 6);
+		_EFControl->AddScreenEffect(VGet(1920 / 2 + 616 / 2 + 100, 1080 / 2, 0), 7);
+		_EFControl->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 8);
 		sndManager.GetSound("end")->Play();
 	}
 

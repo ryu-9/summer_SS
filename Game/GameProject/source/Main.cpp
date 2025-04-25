@@ -26,7 +26,7 @@ Main::Main()
 
 //	SetUseASyncLoadFlag(TRUE);
 	_SaveData = new sdata::SaveDataClass();
-	DrawCenter = VGet(SCREEN_W / 2, GROUND_HEIGHT, 0);
+	DrawCenter = VGet(1920 / 2, GROUND_HEIGHT, 0);
 }
 
 Main::~Main() {

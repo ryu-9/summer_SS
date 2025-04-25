@@ -1,6 +1,6 @@
 #include "ModelServer.h"
 #include "../AppFrame/source/ModeServer/EffectSpriteComponent.h"
-#include <EffekseerForDXLib.h>
+#include <DXLib.h>
 
 ModelServer* ModelServer::_lpInstance = NULL;
 
@@ -63,7 +63,7 @@ int ModelServer::AddEffect(const char* filename, float size)
 		}
 	}
 	_Effect.emplace_back();
-	handle = LoadEffekseerEffect(filename, size);
+//	handle = LoadEffekseerEffect(filename, size);
 	_Effect.back().filepass = filename;
 	_Effect.back().handle.emplace_back(handle);
 
@@ -103,8 +103,7 @@ void ModelServer::UpdateEffect()
 	if (_UpdatedEffectNum >= _EffectHandle.size() && _EffectHandle.size())
 	{
 		_UpdatedEffectNum = 0;
-		UpdateEffekseer3D();
-		DrawEffekseer3D();
+
 	}
 }
 

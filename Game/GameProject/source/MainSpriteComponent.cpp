@@ -21,7 +21,7 @@ MainSpriteComponent::MainSpriteComponent(ActorClass* Owner, VECTOR size, const T
 	SetImage(file);
 	_Cg = GetImage()[0];
 	if (maskflag == TRUE) {
-		_Mask = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
+		_Mask = MakeScreen(1920, 1080, TRUE);
 	}
 }
 
@@ -42,7 +42,7 @@ void MainSpriteComponent::Draw()
 {
 	if (_Cg == -1) {
 		SetDrawBlendMode(DX_BLENDMODE_MULA, 100);
-		DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+		DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		return;
 	}
@@ -72,7 +72,7 @@ void MainSpriteComponent::Draw()
 		}
 		*/
 		SetDrawScreen(_Mask);
-		DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+		DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 		int mode = _Obj->GetBlendMode();
 		int value = _Obj->GetValue();
 		int color = _Obj->GetMyColor();

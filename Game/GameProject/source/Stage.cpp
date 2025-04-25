@@ -265,7 +265,7 @@ void StageFire::UpdateActor()
 		if (tension == 100 || tension == 0) {
 			fire->Init(15);
 			auto f = sndManager.GetSound("fire");
-			auto tmp = ((((int)_Position.x % SCREEN_W) - (SCREEN_W / 2.0f)) / SCREEN_W / 2.0f) * 255;
+			auto tmp = ((((int)_Position.x % 1920) - (1920 / 2.0f)) / 1920 / 2.0f) * 255;
 			f->SetPan(tmp);
 			sndManager.GetSound("fire")->Play();
 		}

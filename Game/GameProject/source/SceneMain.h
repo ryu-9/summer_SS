@@ -1,5 +1,4 @@
 #pragma once
-#include "winmain.h"
 #include "SceneBase.h"
 #include "RhythmControlClass.h"
 #include "Stage.h"

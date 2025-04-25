@@ -27,7 +27,7 @@ SceneTitle::~SceneTitle() {
 void SceneTitle::SetTitle() {
 	DeleteUIs();
 	_UIs.emplace_back(new UIChipClass(this, VGet(0, 0, 0), VGet(1, 1, 1), 0, "res/UI/title/title.png", 50));
-	_UIs.emplace_back(new UIChipClass(this, VGet(SCREEN_W/2, SCREEN_H/2, 0), VGet(1, 1, 1), 1, "res/UI/title/name.png"));
+	_UIs.emplace_back(new UIChipClass(this, VGet(1920/2, 1080/2, 0), VGet(1, 1, 1), 1, "res/UI/title/name.png"));
 	new UIScaleComponent(_UIs.back(), VGet(1.08, 1.08, 0), VGet(0.95, 0.95, 0), 120, 0, 0);
 	SetFontSize(24);
 	ChangeFont("Impact");

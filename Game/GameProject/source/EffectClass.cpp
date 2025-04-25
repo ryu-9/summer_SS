@@ -73,13 +73,13 @@ EffectClass::~EffectClass()
 		//GetScene()->SetSceneFlag(3);
 		break;
 	case 16:									//フェードインエフェクト
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W + 2080, SCREEN_H / 2, 0), 18);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 + 2080, 1080 / 2, 0), 18);
 		sndManager.GetSound("start")->Play();
 		break;
 	case 18:									
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 100, SCREEN_H / 2, 0), 1);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + 100, SCREEN_H / 2, 0), 2);
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 3);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2 - 616 / 2 - 100, 1080 / 2, 0), 1);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2 + 616 / 2 + 100, 1080 / 2, 0), 2);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 3);
 		scene->GetRhythm()->Play();
 		
 	//	scene->GetAI()->SetAI();
@@ -88,9 +88,9 @@ EffectClass::~EffectClass()
 	case 17:									//フェードアウトエフェクト
 		GetScene()->SetSceneFlag(4);
 		if (scene->GetGameSet() == FALSE) {
-		scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 16);
+		scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 16);
 		}
-		else { scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 19); }
+		else { scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 19); }
 		break;
 
 
@@ -237,16 +237,16 @@ void EffectClass::UpdateActor()
 	switch (_ScreenFlag) {
 	case 1:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.2) {
-			SetPosition(VGet(SCREEN_W / 2 - 616 / 2 - 100 + 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 - 616 / 2 - 100 + 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 - 616 / 2, GetPosition().y, 0)); }	
+		else { SetPosition(VGet(1920 / 2 - 616 / 2, GetPosition().y, 0)); }	
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		break;
 	case 2:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.2) {
-			SetPosition(VGet(SCREEN_W / 2 + 616 / 2 + 100 - 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));		
+			SetPosition(VGet(1920 / 2 + 616 / 2 + 100 - 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));		
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 + 616 / 2, GetPosition().y, 0)); }	
+		else { SetPosition(VGet(1920 / 2 + 616 / 2, GetPosition().y, 0)); }	
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		break;
 	case 3:
@@ -254,16 +254,16 @@ void EffectClass::UpdateActor()
 		break;
 	case 6:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.2) {
-			SetPosition(VGet(SCREEN_W / 2 - 616 / 2 - 100 + 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 - 616 / 2 - 100 + 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 - 616 / 2, GetPosition().y, 0)); }
+		else { SetPosition(VGet(1920 / 2 - 616 / 2, GetPosition().y, 0)); }
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		break;
 	case 7:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.2) {
-			SetPosition(VGet(SCREEN_W / 2 + 616 / 2 + 100 - 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 + 616 / 2 + 100 - 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 + 616 / 2, GetPosition().y, 0)); }
+		else { SetPosition(VGet(1920 / 2 + 616 / 2, GetPosition().y, 0)); }
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		break;
 	case 8:
@@ -271,43 +271,43 @@ void EffectClass::UpdateActor()
 		break;
 	case 11:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.1) {
-			SetPosition(VGet(SCREEN_W / 2 - 1000 + 1000 * (_Cnt - _StartTime) / _CgTime / 0.1, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 - 1000 + 1000 * (_Cnt - _StartTime) / _CgTime / 0.1, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 , GetPosition().y, 0)); }
+		else { SetPosition(VGet(1920 / 2 , GetPosition().y, 0)); }
 		if (_Cnt - _StartTime> _CgTime /2) {
-			scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 17);
+			scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 17);
 			_ScreenFlag = -1;
 		}
 		break;
 	case 12:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.1) {
-			SetPosition(VGet(SCREEN_W / 2 + 1000 - 1000 * (_Cnt - _StartTime) / _CgTime / 0.1, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 + 1000 - 1000 * (_Cnt - _StartTime) / _CgTime / 0.1, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 , GetPosition().y, 0)); }
+		else { SetPosition(VGet(1920 / 2 , GetPosition().y, 0)); }
 		if (_Cnt - _StartTime > _CgTime / 2) {
-			scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 17);
+			scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 17);
 			_ScreenFlag = -1;
 		}
 		break;
 	case 13:
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		if (_Cnt - _StartTime > _CgTime / 2) {
-			scene->GetEffectCon()->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 17);
+			scene->GetEffectCon()->AddScreenEffect(VGet(1920 / 2, 1080 / 2, 0), 17);
 			_ScreenFlag = -1;
 		}
 		break;
 	case 14:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.2) {
-			SetPosition(VGet(SCREEN_W / 2 - 616 / 2 - 100 + 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 - 616 / 2 - 100 + 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 - 616 / 2, GetPosition().y, 0)); }
+		else { SetPosition(VGet(1920 / 2 - 616 / 2, GetPosition().y, 0)); }
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		break;
 	case 15:
 		if ((float)(_Cnt - _StartTime) / _CgTime < 0.2) {
-			SetPosition(VGet(SCREEN_W / 2 + 616 / 2 + 100 - 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
+			SetPosition(VGet(1920 / 2 + 616 / 2 + 100 - 100 * (_Cnt - _StartTime) / _CgTime / 0.2, GetPosition().y, 0));
 		}
-		else { SetPosition(VGet(SCREEN_W / 2 + 616 / 2, GetPosition().y, 0)); }
+		else { SetPosition(VGet(1920 / 2 + 616 / 2, GetPosition().y, 0)); }
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime / 0.2);
 		break;
 	case 16:
@@ -318,7 +318,7 @@ void EffectClass::UpdateActor()
 		sc->SetAlpha(255 * (_Cnt - _StartTime) / _CgTime*3/2);
 		break;
 	case 18:
-		SetPosition(VGet(SCREEN_W / 2 + 2080 - 4160 * (_Cnt - _StartTime) / _CgTime, GetPosition().y, 0));
+		SetPosition(VGet(1920 / 2 + 2080 - 4160 * (_Cnt - _StartTime) / _CgTime, GetPosition().y, 0));
 		break;
 
 	case 50:
@@ -371,13 +371,13 @@ void EffectClass::UpdateActor()
 		move.x = sqrt((float)(_Cnt - _StartTime) / _CgTime);
 		sc->SetSize(VGet(500 * move.x, 105, 0));
 		sc->SetAlpha(255 - 255 * move.x);
-		SetPosition(VGet(-move.x * 250 + SCREEN_W / 2 - 102, 1011, 0));
+		SetPosition(VGet(-move.x * 250 + 1920 / 2 - 102, 1011, 0));
 		break;
 	case 56:
 		move.x = sqrt((float)(_Cnt - _StartTime) / _CgTime);
 		sc->SetSize(VGet(500 * move.x, 105, 0));
 		sc->SetAlpha(255 - 255 * move.x);
-		SetPosition(VGet(move.x * 250 + SCREEN_W / 2 + 102, 1011, 0));
+		SetPosition(VGet(move.x * 250 + 1920 / 2 + 102, 1011, 0));
 		break;
 
 	case 60:

@@ -1,7 +1,7 @@
 
 #include "ApplicationBase.h"
 #include <vector>
-#include <EffekseerForDXLib.h>
+#include <DXLib.h>
 
 ApplicationBase	*ApplicationBase::_lpInstance = NULL;
 
@@ -31,11 +31,6 @@ bool ApplicationBase::Initialize(HINSTANCE hInstance) {
 	}
 	SetDrawScreen(DX_SCREEN_BACK);		// 描画先画面を裏画面にセット
 
-	if (Effekseer_Init(8000) == -1) {
-		return false;
-	}
-
-	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 
 	// 乱数初期化
 	srand((unsigned int)time(NULL));
@@ -50,7 +45,6 @@ bool ApplicationBase::Initialize(HINSTANCE hInstance) {
 
 bool ApplicationBase::Terminate() {
 	// DXライブラリ開放
-	Effkseer_End();
 	DxLib_End();
 
 	return true;

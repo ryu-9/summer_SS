@@ -350,7 +350,7 @@ void RhythmControlClass::SucFrontNote(int type, bool flag)
 			_Notes[type].front().notetype = -2;
 		}
 		auto main = dynamic_cast<SceneMain*>(GetScene());
-		main->GetEffectCon()->AddScreenEffect(VGet(5 + SCREEN_W / 2 + 102, 1011, 0), 55 + type);
+		main->GetEffectCon()->AddScreenEffect(VGet(5 + 1920 / 2 + 102, 1011, 0), 55 + type);
 		GetScene()->GetPlayer(type)->SetNotesType(-2);
 		sndManager.GetSound("nsuc")->Play();
 	}
@@ -441,7 +441,7 @@ void RhythmControlClass::UpdateNotes() {
 		Inoperable[i][1] = EasingLinear(_MeasureTime + (FPSNow - tmpTime - (j - 6) * frametime - GetScene()->GetFPSCon()->GetSession() * frametime), 0, _Center, _MeasureTime);
 		Inoperable[i][2] = EasingLinear(_MeasureTime + (FPSNow - tmpTime - num * frametime - GetScene()->GetFPSCon()->GetSession() * frametime), 0, _Center, _MeasureTime);
 
-		if (SCREEN_W / 2 < Inoperable[i][1]) { Inoperable[i][1] = SCREEN_W / 2; }
+		if (1920 / 2 < Inoperable[i][1]) { Inoperable[i][1] = 1920 / 2; }
 
 		for (auto j = 0; j < _Notes[i].size(); j++) {
 

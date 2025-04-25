@@ -1,6 +1,5 @@
 #include "HitBox.h"
 #include "SceneBase.h"
-#include "winmain.h"
 
 int IsHitCC(VECTOR pos1, VECTOR r1, VECTOR pos2, VECTOR r2) {
 	if (VSize(VSub(pos1, pos2)) <= r1.x+r2.x) {
@@ -187,7 +186,7 @@ int CheckHitSome(VECTOR pos1, VECTOR r1, int rotate1, VECTOR pos2, VECTOR r2, in
 }
 
 void DrawHitBox(VECTOR pos, VECTOR r, int rotate, unsigned int color, CameraClass* cam) {
-	VECTOR DrawV = VGet(SCREEN_W / 2, GROUND_HEIGHT, 0);
+	VECTOR DrawV = VGet(1920 / 2, GROUND_HEIGHT, 0);
 	if (r.z == 0) {
 		float diam = r.x*cam->GetZomm();
 		VECTOR position = VAdd(VTransform(pos, cam->GetView()),DrawV);

@@ -1,7 +1,6 @@
 #include "SoundManager.h"
 #include "SceneBase.h"
 #include <string>
-#include "winmain.h"
 
 SoundManager::SoundManager() {
 	_isUpdate = false;

@@ -78,7 +78,7 @@ void PsylliumSpriteComponent::Draw()
 
 	VECTOR pos2 = pos;
 	float tmpDist = pos.x - 7 * PSYLLIUM_DIST * 4;
-	float tmpRot = atan2(tmpDist,SCREEN_W/2);
+	float tmpRot = atan2(tmpDist,1920/2);
 	float test =  tmpSlope * cos(tmpRot);
 	//test = size * 25 / z * test;
 	pos2.y += (1 - cos(tmpRot)) * 1000 / z;
@@ -94,7 +94,7 @@ void PsylliumSpriteComponent::Draw()
 
 	//DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "%f", tmpSlope * (cos(tmpRot)));
 
-	VECTOR DrawV = VGet(SCREEN_W / 2, GROUND_HEIGHT, 0);	//•`‰æ’†S
+	VECTOR DrawV = VGet(1920 / 2, GROUND_HEIGHT, 0);	//•`‰æ’†S
 	MATRIX cam = _Owner->GetScene()->GetCamera()->GetView();
 	VECTOR vert[4];
 	VECTOR sizeV = VGet(size * 25 / z, size * 25 / z * (1 - test), 0);

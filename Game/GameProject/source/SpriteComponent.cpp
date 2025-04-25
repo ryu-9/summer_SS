@@ -1,10 +1,10 @@
 #include "SpriteComponent.h"
 #include "ActorClass.h"
 #include "SceneBase.h"
-#include "winmain.h"
 #include "Stage.h"
 #include "PlayerClass.h"
 #include "MainSpriteComponent.h"
+
 
 SpriteComponent::SpriteComponent(ActorClass* owner, int drawOrder, int alpha)
 	:Component(owner)
@@ -36,7 +36,7 @@ void SpriteComponent::SetImage(const TCHAR* filename) {
 void MyDrawMain(VECTOR pos, VECTOR size, int cg, MATRIX cam, bool rev, bool flag)
 {
 	VECTOR cf[4];
-	VECTOR DrawV = VGet(SCREEN_W/2,GROUND_HEIGHT,0);	//ï`âÊíÜêS
+	VECTOR DrawV = VGet(1920/2,GROUND_HEIGHT,0);	//ï`âÊíÜêS
 	cf[0] = VTransform(VAdd(pos, VScale(size, -0.5f)), cam);
 	cf[0] = VAdd(cf[0],DrawV);
 	cf[2] = VTransform(VAdd(pos, VScale(size, 0.5f)), cam);
@@ -116,16 +116,16 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawScreen(mask4);
 	ClearDrawScreen();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0,0,0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0,0,0), TRUE);
 	SetUseMaskScreenFlag(TRUE);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255,255,255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255,255,255), TRUE);
 
 
 	SetUseMaskScreenFlag(FALSE);
 	SetDrawScreen(mask2);
 	
 	ClearDrawScreen();
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255,255,255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255,255,255), TRUE);
 
 	SetDrawBlendMode(DX_BLENDMODE_PMA_SUB,255);
 	DrawGraph(0, 0, mask4, TRUE);
@@ -161,9 +161,9 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawScreen(mask4);
 	ClearDrawScreen();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 	SetUseMaskScreenFlag(TRUE);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255, 255, 255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 
 
 
@@ -176,7 +176,7 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawScreen(mask1);
 	ClearDrawScreen();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255, 255, 255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 
 
 
@@ -193,9 +193,9 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawScreen(mask4);
 	ClearDrawScreen();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 	SetUseMaskScreenFlag(TRUE);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255, 255, 255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 
 
 
@@ -205,7 +205,7 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawBlendMode(DX_BLENDMODE_PMA_SUB, 255);
 	DrawGraph(0, 0, mask4, TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_DST_RGB_SRC_A, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255, 255, 255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 
 
 
@@ -227,19 +227,19 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 
 	SetDrawScreen(mask4);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255, 255, 255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 	DrawGraph(0, 0, mask2, TRUE);
 
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(55, 55, 55), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(55, 55, 55), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_SUB, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(200,200,200), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(200,200,200), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_DST_RGB_SRC_A, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0,0,0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0,0,0), TRUE);
 
 	SetDrawScreen(mask1);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0,0,0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0,0,0), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
 	for (int i = 0; i * (255 - 200) < 250; i++) {
 		DrawGraph(0, 0, mask4, TRUE);
@@ -255,7 +255,7 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetMaskScreenGraph(mask1);
 	SetUseMaskScreenFlag(TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 
 
 
@@ -263,15 +263,15 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetUseMaskScreenFlag(FALSE);
 	SetDrawScreen(mask4);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(255, 255, 255), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 	DrawGraph(0, 0, mask2, TRUE);
 
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(155,155,155), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(155,155,155), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_SUB, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(240,240,240), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(240,240,240), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_DST_RGB_SRC_A, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 
 
 
@@ -279,7 +279,7 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 
 	SetDrawScreen(mask1);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0,0,0), TRUE);
+	DrawBox(0, 0, 1920, 1080, GetColor(0,0,0), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
 	for (int i = 0; (i) * (255 - 240) < 250; i++) {
 		DrawGraph(0, 0, mask4, TRUE);

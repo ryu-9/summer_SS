@@ -7,8 +7,8 @@ PlayerSpriteComponent::PlayerSpriteComponent(class PlayerClass* owner, int drawO
 	:SpriteComponent(owner, drawOrder)
 	,_Player(owner)
 {
-	_ShadowMask[0] = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
-	_ShadowMask[1] = MakeScreen(SCREEN_W, SCREEN_H, TRUE);
+	_ShadowMask[0] = MakeScreen(1920, 1080, TRUE);
+	_ShadowMask[1] = MakeScreen(1920, 1080, TRUE);
 }
 
 PlayerSpriteComponent::~PlayerSpriteComponent() 
@@ -72,7 +72,7 @@ void PlayerSpriteComponent::Draw(){
 	//DrawFormatString(_Owner->GetPosition().x, _Owner->GetPosition().y, GetColor(200, 64, 64), "%d", _Player->GetMotionID());
 	SetDrawScreen(_ShadowMask[0]);
 	ClearDrawScreen();
-	//DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(100, 100, 100), TRUE);
+	//DrawBox(0, 0, 1920, 1080, GetColor(100, 100, 100), TRUE);
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	for (const auto& light : _Player->GetScene()->GetLights()) {
@@ -80,7 +80,7 @@ void PlayerSpriteComponent::Draw(){
 		DrawLighting(_Player, light, _Owner->GetScene()->GetScreenMask(), _Owner->GetScene()->GetSubMask(), _ShadowMask[0], _ShadowMask[1]);
 	}
 
-	//DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
+	//DrawBox(0, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 	//DrawGraph(0, 0, _ShadowMask, TRUE);
 
 	SetMaskScreenGraph(_ShadowMask[0]);
