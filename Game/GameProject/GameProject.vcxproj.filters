@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{ce3fc467-6e3a-4b29-b813-f329f1b19b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{2dc149ba-a052-4def-8380-6a89faf736ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ioJson">
+      <UniqueIdentifier>{1249110e-7d06-4d31-8c32-2efa1f478e25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Func">
+      <UniqueIdentifier>{d5073e63-73e6-4f39-a643-991da38c29b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\Main">
+      <UniqueIdentifier>{d94448e6-8b3b-4025-81fa-e20b8f8d464c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\Main\AISystem">
+      <UniqueIdentifier>{5eedfb97-0c8d-4922-a43c-04ff29082bf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\Main\Component">
+      <UniqueIdentifier>{77c6335f-b4ed-46df-9d05-674afb5feb3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\Main\Component\Sprite">
+      <UniqueIdentifier>{3e1f9e25-15e3-4857-8f5b-b314e6899852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\Main\Actor">
+      <UniqueIdentifier>{9df643b3-7e5a-4acd-9d9e-84a0a097cf34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Main">
+      <UniqueIdentifier>{2498ef76-6c07-474c-9934-0833c91cbcfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Main\AISystem">
+      <UniqueIdentifier>{19e0fa2a-17a1-4a9d-980d-04067a811d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Main\Component">
+      <UniqueIdentifier>{ae7d73c9-7f06-4ecf-86dd-ed3f96c9cd72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Main\Component\Sprite">
+      <UniqueIdentifier>{6c52f726-6e31-42af-bc57-e489bb867ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Main\Actor">
+      <UniqueIdentifier>{6b56b02e-188e-4dec-a680-55ef8a8915ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Func">
+      <UniqueIdentifier>{c1134024-9a79-4023-b94a-337ed7dd9002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Sound">
+      <UniqueIdentifier>{56c6e46c-68fc-4fcd-8588-ee78246d8bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Sound">
+      <UniqueIdentifier>{4a56d012-4867-4279-a3fe-a5d12358133d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\OutGame">
+      <UniqueIdentifier>{62419345-e1d4-4ed6-a962-34d9833d385f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\OutGame">
+      <UniqueIdentifier>{6aa16717-47ef-4b68-95af-2511cb23207e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\OutGame\Title">
+      <UniqueIdentifier>{912ddddc-53df-4b53-a2f3-2038343784a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\OutGame\UI">
+      <UniqueIdentifier>{458576b5-ad20-4373-bd16-9f2f6a3f1092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\OutGame\UI\chara">
+      <UniqueIdentifier>{21ee47f1-1746-445f-9a7d-2a71c9c27a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\OutGame\Title">
+      <UniqueIdentifier>{667c3b5b-71a9-479b-904e-5c4bd0a930fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\OutGame\UI">
+      <UniqueIdentifier>{b787d851-f5a9-47a1-828f-70c16e25766f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\OutGame\UI\Chip">
+      <UniqueIdentifier>{0c495980-f0aa-466e-9a19-8007adbe2dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\OutGame\UI\Chip">
+      <UniqueIdentifier>{234687c5-4ed0-45f6-9fbd-ba7a673c69c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\OutGame\UI\action">
+      <UniqueIdentifier>{4f0ba5a7-dee6-42b2-b168-163fcf2aa675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\OutGame\UI\Action">
+      <UniqueIdentifier>{a602e900-48bb-4b45-aa15-de5407556c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\OutGame\UI\Chara">
+      <UniqueIdentifier>{a321a18e-d64b-47bd-b2fc-27b129bddbc1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\winmain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gamepad.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MotionComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlayerComponentBase.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneBase.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ioJson.cpp">
+      <Filter>ioJson</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SaveDataClass.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIControlClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\AISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MainSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\NoteSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlayerSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlayerUISpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PsylliumSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CameraClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FPSControlClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlayerClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Stage.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BackLightSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BackLightClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EffectClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EffectControlClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneTitle.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SynopsisComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SynopsisSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SynopsisClass.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SpriteComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Component.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ActorClass.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneMain.cpp">
+      <Filter>ソース ファイル\Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mymath.cpp">
+      <Filter>ソース ファイル\Func</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HitBox.cpp">
+      <Filter>ソース ファイル\Func</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MyFunc.cpp">
+      <Filter>ソース ファイル\Func</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LightingComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ScreenSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AudienceComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RhythmControlClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ioJsonText.cpp">
+      <Filter>ioJson</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SoundManager.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SoundItem.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIChipSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SoundItemSyncSystem.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FlameClass.cpp">
+      <Filter>ソース ファイル\Scene\Main\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIProcessComponent.cpp">
+      <Filter>ソース ファイル\Scene\Main\AISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BuildScene.cpp">
+      <Filter>ioJson</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneInstruction.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneEnding.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneDialogue.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneSelect.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneOption.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneMenu.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SceneOutGameBase.cpp">
+      <Filter>ソース ファイル\Scene\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIExitComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIMoveComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIScaleComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIChipClass.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIFadeSpriteClass.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIMessageSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UICharaSpriteComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UICharaClass.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UICursorComponent.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIActionComponentBase.cpp">
+      <Filter>ソース ファイル\Scene\OutGame\UI\Action</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\winmain.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gamepad.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MotionComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PlayerComponentBase.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneBase.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ioJson.h">
+      <Filter>ioJson</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SaveDataClass.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIStruct.h">
+      <Filter>ヘッダー ファイル\Scene\Main\AISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIControlClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\AISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MainSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\NoteSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PlayerSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PlayerUISpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PsylliumSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FPSControlClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PlayerClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Stage.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CameraClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BackLightSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BackLightClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EffectControlClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EffectClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MyFunc.h">
+      <Filter>ヘッダー ファイル\Func</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mymath.h">
+      <Filter>ヘッダー ファイル\Func</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HitBox.h">
+      <Filter>ヘッダー ファイル\Func</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneTitle.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneMain.h">
+      <Filter>ヘッダー ファイル\Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SynopsisComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SynopsisSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Component.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SynopsisClass.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ActorClass.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CharaStruct.h">
+      <Filter>ヘッダー ファイル\Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SpriteComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\LightingComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ScreenSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AudienceComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RhythmControlClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CommonDataClass.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ioJsonText.h">
+      <Filter>ioJson</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SoundManager.h">
+      <Filter>ヘッダー ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SoundItem.h">
+      <Filter>ヘッダー ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIChipSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UICharaSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\chara</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UICharaComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\chara</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UICharaClass.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\chara</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SoundItemSyncSystem.h">
+      <Filter>ヘッダー ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FlameClass.h">
+      <Filter>ヘッダー ファイル\Scene\Main\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIProcessComponent.h">
+      <Filter>ヘッダー ファイル\Scene\Main\AISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BuildScene.h">
+      <Filter>ioJson</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneSelect.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneDialogue.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneEnding.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneInstruction.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneMenu.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneOption.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneOutGameBase.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIExitComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\action</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIMoveComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\action</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIScaleComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\action</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIChipClass.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIMessageSpriteComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIFadeSpriteClass.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UICursorComponent.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\action</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UIActionComponentBase.h">
+      <Filter>ヘッダー ファイル\Scene\OutGame\UI\action</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

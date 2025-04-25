@@ -1,0 +1,87 @@
+#pragma once
+#include "PlayerComponentBase.h"
+#include "deque"
+#include "SaveDataClass.h"
+
+
+class MotionComponent : public PlayerComponentBase {
+public:
+	enum MotionID {
+		MOT_R_STAND,
+		MOT_L_STAND,
+		MOT_R_RUN,
+		MOT_L_RUN,
+		MOT_R_CROUCH,
+		MOT_L_CROUCH,
+		MOT_R_JUMP_DOWN,
+		MOT_L_JUMP_DOWN,
+		MOT_R_JUMP_UP,
+		MOT_L_JUMP_UP,
+		MOT_R_ATTACK1_STAND,
+		MOT_L_ATTACK1_STAND,
+		MOT_R_ATTACK1_JUMP,
+		MOT_L_ATTACK1_JUMP,
+		MOT_R_ATTACK1_CROUCH,
+		MOT_L_ATTACK1_CROUCH,
+		MOT_R_ATTACK1_COMBO1,
+		MOT_L_ATTACK1_COMBO1,
+		MOT_R_ATTACK1_COMBO2,
+		MOT_L_ATTACK1_COMBO2,
+		MOT_R_ATTACK1_CROUCH_COMBO,
+		MOT_L_ATTACK1_CROUCH_COMBO,
+		MOT_R_ATTACK2_STAND_SUC,
+		MOT_L_ATTACK2_STAND_SUC,
+		MOT_R_ATTACK2_JUMP_SUC,
+		MOT_L_ATTACK2_JUMP_SUC,
+		MOT_R_ATTACK2_CROUCH_SUC,
+		MOT_L_ATTACK2_CROUCH_SUC,
+		MOT_R_ATTACK2_COMBO1_SUC,
+		MOT_L_ATTACK2_COMBO1_SUC,
+		MOT_R_ATTACK2_COMBO2_SUC,
+		MOT_L_ATTACK2_COMBO2_SUC,
+		MOT_R_ATTACK2_STAND_FAIL,
+		MOT_L_ATTACK2_STAND_FAIL,
+		MOT_R_ATTACK2_JUMP_FAIL,
+		MOT_L_ATTACK2_JUMP_FAIL,
+		MOT_R_ATTACK2_CROUCH_FAIL,
+		MOT_L_ATTACK2_CROUCH_FAIL,
+		MOT_R_ATTACK2_CROUCH_COMBO_FAIL,
+		MOT_L_ATTACK2_CROUCH_COMBO_FAIL,
+		MOT_R_ATTACK2_COMBO1_FAIL,
+		MOT_L_ATTACK2_COMBO1_FAIL,
+		MOT_R_ATTACK2_COMBO2_FAIL,
+		MOT_L_ATTACK2_COMBO2_FAIL,
+		MOT_R_GRAB_TRY,
+		MOT_L_GRAB_TRY,
+		MOT_R_GRAB_SUC,
+		MOT_L_GRAB_SUC,
+		MOT_R_STEP_SUC,
+		MOT_L_STEP_SUC,
+		MOT_R_STEP_FAIL,
+		MOT_L_STEP_FAIL,
+		MOT_R_DAMAGE,
+		MOT_L_DAMAGE,
+		MOT_R_DAMAGE_CROUCH,
+		MOT_L_DAMAGE_CROUCH,
+		MOT_R_DAMAGE_FLY,
+		MOT_L_DAMAGE_FLY,
+		MOT_R_DAMAGE_RISE,
+		MOT_L_DAMAGE_RISE,
+		MOT_NUM
+	};
+
+	MotionComponent(class PlayerClass* owner,int updateOrder = 100);
+
+	void ProcessInput() override;
+	void Update() override;
+	int GetArrow() { return _Arrow; };
+	void SetArrow(int arrow) { _Arrow = arrow; }
+
+private:
+	int _MotionChange;
+	
+	int _Arrow;
+	int _Gravity;
+	std::deque<int> _OldMotionChange;
+	sdata::SaveDataClass* _SaveData();
+};

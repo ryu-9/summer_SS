@@ -1,0 +1,406 @@
+{
+	"motion": [
+		{
+			"motionname": "R_STAND",
+			"filename": "sound_back_1",
+			"cgnum": 1,
+			"frame": [
+				{
+					"type": 0,
+					"mx": 0,
+					"my": 0,
+					"w": 1000,
+					"h": 1000,
+					"cg": 0,
+					"hitbox": [
+						{
+							"hitx": 200,
+							"hity": 100,
+							"hitw": 600,
+							"hith": 800,
+							"isrect": 1,
+							"rotate": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "R_DAMAGE",
+			"filename": "sound_back_2",
+			"cgnum": 1,
+			"frame": [
+				{
+					"type": 0,
+					"mx": 0,
+					"my": 0,
+					"w": 1000,
+					"h": 1000,
+					"cg": 0,
+					"hitbox": [
+						{
+							"hitx": 200,
+							"hity": 100,
+							"hitw": 600,
+							"hith": 800,
+							"isrect": 1,
+							"rotate": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "R_DAMAGE_CROUCH",
+			"filename": "sound_back_2",
+			"cgnum": 1,
+			"frame": [
+				{
+					"type": 0,
+					"mx": 0,
+					"my": 0,
+					"w": 1000,
+					"h": 1000,
+					"cg": 0,
+					"hitbox": [
+						{
+							"hitx": 200,
+							"hity": 100,
+							"hitw": 600,
+							"hith": 800,
+							"isrect": 1,
+							"rotate": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "R_DAMAGE_FLY",
+			"filename": "sound_back_2",
+			"cgnum": 1,
+			"frame": [
+				{
+					"type": 0,
+					"mx": 0,
+					"my": 0,
+					"w": 1000,
+					"h": 1000,
+					"cg": 0,
+					"hitbox": [
+						{
+							"hitx": 200,
+							"hity": 100,
+							"hitw": 600,
+							"hith": 800,
+							"isrect": 1,
+							"rotate": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"motionname": "R_DAMAGE_FLY",
+			"filename": "sound_back_2",
+			"cgnum": 1,
+			"frame": [
+				{
+					"type": 0,
+					"mx": 0,
+					"my": 0,
+					"w": 1000,
+					"h": 1000,
+					"cg": 0,
+					"hitbox": [
+						{
+							"hitx": 200,
+							"hity": 100,
+							"hitw": 600,
+							"hith": 800,
+							"isrect": 1,
+							"rotate": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		},
+		{
+			"motionname": "L_STAND",
+			"frame": [
+			]
+		}
+	]
+}
+		
+		
