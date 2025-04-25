@@ -269,7 +269,7 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
 	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(155,155,155), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_SUB, 255);
-	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(240,240,240), TRUE);
+	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(250,250,250), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_DST_RGB_SRC_A, 255);
 	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0, 0, 0), TRUE);
 
@@ -281,7 +281,7 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 	DrawBox(0, 0, SCREEN_W, SCREEN_H, GetColor(0,0,0), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
-	for (int i = 0; (i) * (255 - 240) < 250; i++) {
+	for (int i = 0; (i) * (255 - 250) < 250; i++) {
 		DrawGraph(0, 0, mask4, TRUE);
 	}
 
@@ -292,14 +292,27 @@ void DrawLighting(PlayerClass* player, LightingComponent* Light, int mask1, int 
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	SetDrawBlendMode(DX_BLENDMODE_ADD, 150);
+
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+	//SetUseMaskScreenFlag(FALSE);
+	//DrawGraph(0, 0, mask1, TRUE);
+
+
+
+
 
 
 	SetMaskReverseEffectFlag(FALSE);
 	SetUseMaskScreenFlag(TRUE);
 	SetMaskScreenGraph(mask1);
 
-	Light->Draw();
+	SetDrawBlendMode(DX_BLENDMODE_MUL, 200);
+	Light->Draw(TRUE, FALSE);
+	SetDrawBlendMode(DX_BLENDMODE_ADD, 100);
+	Light->Draw(TRUE, FALSE);
+
+
+	//Light->Draw();
 
 	SetUseMaskScreenFlag(FALSE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

@@ -225,9 +225,9 @@ void StageLight::UpdateActor()
 	int r, g, b;
 	tmpTension = (1-_No) * 100 - tmpTension;
 	if (tmpTension < 0) { tmpTension *= -1; }
-	r = _Color[_No][0] * tmpTension / 100 + 255 * (100 - tmpTension) / 100;
-	g = _Color[_No][1] * tmpTension / 100 + 255 * (100 - tmpTension) / 100;
-	b = _Color[_No][2] * tmpTension / 100 + 255 * (100 - tmpTension) / 100;
+	r = _Color[_No][0] * tmpTension / 100 + 225 * (100 - tmpTension) / 100;
+	g = _Color[_No][1] * tmpTension / 100 + 225 * (100 - tmpTension) / 100;
+	b = _Color[_No][2] * tmpTension / 100 + 225 * (100 - tmpTension) / 100;
 
 	sp->SetColor(GetColor(r, g, b));
 	land->SetColor(GetColor(r, g, b));

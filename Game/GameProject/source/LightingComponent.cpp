@@ -26,7 +26,7 @@ LightingComponent::~LightingComponent()
 	_Owner->GetScene()->RemoveLight(this);
 }
 
-void LightingComponent::Draw(bool color)
+void LightingComponent::Draw(bool color, bool blend)
 {
 	if (_Flag != TRUE) { return; }
 	//MyDrawMain(GetPosition(),_Size,_Cg,_Owner->GetScene()->GetCamera()->GetView());
@@ -58,11 +58,16 @@ void LightingComponent::Draw(bool color)
 	if (_FadeCnt > 0){
 		int value = (float)(GetNowCount() - _Start) / _FadeCnt*255;
 		if (_Color == GetColor(255, 255, 255)) { value *= 150 / 255; }
-		SetDrawBlendMode(DX_BLENDMODE_ADD, 50 - 50 * (GetNowCount() - _Start) / _FadeCnt);
+		if (blend) {
+			SetDrawBlendMode(DX_BLENDMODE_ADD, 50 - 50 * (GetNowCount() - _Start) / _FadeCnt);
+		}
+
 		DrawModiGraph((int)cf[0].x, (int)cf[0].y, (int)cf[1].x, (int)cf[1].y, (int)cf[2].x, (int)cf[2].y, (int)cf[3].x, (int)cf[3].y, _Cg, TRUE);
 		DrawModiGraph((int)cf[0].x, (int)cf[0].y, (int)cf[1].x, (int)cf[1].y, (int)cf[2].x, (int)cf[2].y, (int)cf[3].x, (int)cf[3].y, _Cg, TRUE);
 		//DrawModiGraph(cf[0].x, cf[0].y, cf[1].x, cf[1].y, cf[2].x, cf[2].y, cf[3].x, cf[3].y, _Cg, TRUE);
-		SetDrawBlendMode(DX_BLENDMODE_MULA, 150 - 150 * (GetNowCount() - _Start) / _FadeCnt);
+		if (blend) {
+			SetDrawBlendMode(DX_BLENDMODE_MULA, 150 - 150 * (GetNowCount() - _Start) / _FadeCnt);
+		}
 		DrawModiGraph((int)cf[0].x, (int)cf[0].y, (int)cf[1].x, (int)cf[1].y, (int)cf[2].x, (int)cf[2].y, (int)cf[3].x, (int)cf[3].y, _Cg, TRUE);
 		//DrawModiGraph(cf[0].x, cf[0].y, cf[1].x, cf[1].y, cf[2].x, cf[2].y, cf[3].x, cf[3].y, _Cg, TRUE);
 
@@ -70,14 +75,21 @@ void LightingComponent::Draw(bool color)
 	}
 	else if(_FadeCnt<=0){
 		if (color == FALSE) { 
-			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255); 
+			if (blend) {
+				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+			}
 			DrawModiGraph((int)cf[0].x, (int)cf[0].y, (int)cf[1].x, (int)cf[1].y, (int)cf[2].x, (int)cf[2].y, (int)cf[3].x, (int)cf[3].y, _Cg, TRUE);
 			//DrawModiGraph(cf[0].x, cf[0].y, cf[1].x, cf[1].y, cf[2].x, cf[2].y, cf[3].x, cf[3].y, _Cg, TRUE);
 		}
 		else {
-			SetDrawBlendMode(DX_BLENDMODE_MULA, 50);
+			if (blend) {
+				SetDrawBlendMode(DX_BLENDMODE_MULA, 50);
+			}
+
 			DrawModiGraph((int)cf[0].x, (int)cf[0].y, (int)cf[1].x, (int)cf[1].y, (int)cf[2].x, (int)cf[2].y, (int)cf[3].x, (int)cf[3].y, _Cg, TRUE);
-			SetDrawBlendMode(DX_BLENDMODE_ADD, _Value);
+			if (blend) {
+				SetDrawBlendMode(DX_BLENDMODE_ADD, _Value);
+			}
 			DrawModiGraph((int)cf[0].x, (int)cf[0].y, (int)cf[1].x, (int)cf[1].y, (int)cf[2].x, (int)cf[2].y, (int)cf[3].x, (int)cf[3].y, _Cg, TRUE);
 
 		}

@@ -7,7 +7,7 @@ public:
 	LightingComponent(ActorClass* owner, VECTOR size, int file, int fadeCnt = -1, VECTOR center = VGet(0, 0, 0), int color = GetColor(255, 255, 255));
 	virtual ~LightingComponent();
 	void SetImage(int cg) { _Cg = cg; }
-	void Draw(bool color = TRUE);
+	void Draw(bool color = TRUE, bool blend = TRUE);
 
 	int GetFadeCnt() { return 30 * (GetNowCount() - _Start) / _FadeCnt; }
 	VECTOR GetPosition() { return VAdd(_Owner->GetPosition(),_Center); }

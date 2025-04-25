@@ -59,9 +59,7 @@ void PlayerSpriteComponent::Draw(){
 		SetDrawBright(255, 255, 255);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
-	//DrawExtendGraph(_Owner->GetPosition().x-tmp.w/2, _Owner->GetPosition().y-tmp.h, _Owner->GetPosition().x + tmp.w/2, _Owner->GetPosition().y , tmp.cg, TRUE);
-
-
+	
 	auto scene = dynamic_cast<SceneMain*>(_Owner->GetScene());
 	int r, g, b;
 	GetColor2(scene->GetMyColor(), &r, &g, &b);
