@@ -282,7 +282,21 @@ void SceneMain::Update()
 
 void SceneMain::Draw() {
 	SceneBase::Draw();
+	return;
 
+	// デバッグ用の当たり判定描画
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 125);
+	for (int i = 0; i < 2; i++) {
+		auto atbox = _Player[i]->GetFrame().at;
+		for (int j = 0; j < atbox.size(); j++) {
+			DrawHitBox(VAdd(_Player[i]->GetPosition(), atbox[j].pos), atbox[j].r, atbox[j].rotate, GetColor(255, 0, 0), _Cam);
+		}
+		auto hitbox = _Player[i]->GetFrame().hit;
+		for (int j = 0; j < hitbox.size(); j++) {
+			DrawHitBox(VAdd(_Player[i]->GetPosition(), hitbox[j].pos), hitbox[j].r, hitbox[j].rotate, GetColor(0, 0, 255), _Cam);
+		}
+	}
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 }
 
 
