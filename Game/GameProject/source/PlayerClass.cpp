@@ -12,13 +12,53 @@
 
 namespace {
 
-// A player loses once the shared tension gauge is pushed fully to the opponent side.
+// A player loses once their own tension gauge is reduced to zero.
 bool IsTensionDefeated(SceneBase* scene, int playerNo)
 {
-	if (playerNo == 0) {
-		return scene->GetTension() >= 100;
+	return scene->GetPlayerTension(playerNo) <= 0;
+}
+
+bool IsWordAttackMotion(int motionId)
+{
+	return motionId >= MotionComponent::MOT_R_ATTACK1_STAND &&
+		motionId <= MotionComponent::MOT_L_ATTACK1_CROUCH_COMBO;
+}
+
+bool IsSuccessfulInstrumentMotion(int motionId)
+{
+	return motionId >= MotionComponent::MOT_R_ATTACK2_STAND_SUC &&
+		motionId <= MotionComponent::MOT_L_ATTACK2_COMBO2_SUC;
+}
+
+bool IsFailedInstrumentMotion(int motionId)
+{
+	return motionId >= MotionComponent::MOT_R_ATTACK2_STAND_FAIL &&
+		motionId <= MotionComponent::MOT_L_ATTACK2_COMBO2_FAIL;
+}
+
+bool IsGrabSuccessMotion(int motionId)
+{
+	return motionId == MotionComponent::MOT_R_GRAB_SUC ||
+		motionId == MotionComponent::MOT_L_GRAB_SUC;
+}
+
+void ApplyGrabTensionDelta(SceneBase* scene, int playerNo, int tensionDelta, bool recovering)
+{
+	int nextPlayerTension = scene->GetPlayerTension(playerNo);
+	if (recovering) {
+		nextPlayerTension += tensionDelta;
 	}
-	return scene->GetTension() <= 0;
+	else {
+		nextPlayerTension -= tensionDelta;
+	}
+	if (nextPlayerTension < 0) { nextPlayerTension = 0; }
+	if (nextPlayerTension > 100) { nextPlayerTension = 100; }
+
+	if (playerNo == 0) {
+		scene->SetTension(nextPlayerTension, 100 - nextPlayerTension);
+		return;
+	}
+	scene->SetTension(100 - nextPlayerTension, nextPlayerTension);
 }
 
 // Old HP-sized damage values are converted into tension movement using the per-character scale.
@@ -41,6 +81,22 @@ void ApplyTensionForHpDelta(SceneBase* scene, int playerNo, int maxHp, int hpDel
 {
 	int tensionDelta = ConvertHpDeltaToTension(hpDelta, maxHp);
 	if (tensionDelta == 0) {
+		return;
+	}
+
+	int enemyMotionId = scene->GetPlayer(1 - playerNo)->GetMotionID();
+	if (IsGrabSuccessMotion(enemyMotionId)) {
+		ApplyGrabTensionDelta(scene, playerNo, tensionDelta, hpDelta > 0);
+		return;
+	}
+
+	bool nonZeroSumAttack = IsWordAttackMotion(enemyMotionId) || IsFailedInstrumentMotion(enemyMotionId);
+	if (nonZeroSumAttack) {
+		if (hpDelta < 0) {
+			scene->ChangePlayerTension(playerNo, -tensionDelta);
+			return;
+		}
+		scene->ChangePlayerTension(playerNo, tensionDelta);
 		return;
 	}
 
@@ -610,9 +666,13 @@ bool PlayerClass::FrameProcess()
 			}
 		}
 	}
-	if (_MotionID < MotionComponent::MOT_R_ATTACK1_STAND &&
-		_MotionID > MotionComponent::MOT_L_GRAB_SUC) {
+	if (((_MotionID < MotionComponent::MOT_R_ATTACK1_STAND) ||
+		(_MotionID > MotionComponent::MOT_L_GRAB_SUC)) &&
+		!(_MotionID >= MotionComponent::MOT_R_STEP_SUC && _MotionID <= MotionComponent::MOT_L_STEP_FAIL)) {
 		_ComboFlag = FALSE;
+	}
+	else {
+		_ComboFlag = TRUE;
 	}
 
 	if (_FrameCnt >= size(_MotionDate[_MotionID])) {
@@ -663,7 +723,11 @@ void PlayerClass::MotionUpdate()
 				if (CheckHitSome(VAdd(player.hit[i].pos, _Position), player.hit[i].r, player.hit[i].rotate,
 					VAdd(enemy.at[j].pos, GetScene()->GetPlayer(1 - _PlayerNo)->GetPosition()), enemy.at[j].r, enemy.at[j].rotate) == 1) {
 					HitCnt++;
-					if (_BulletF == FALSE && HitCnt <= 1&&_InvFlag==FALSE) { 
+					bool enemyGrabAttack = (_EnMotionID == MotionComponent::MOT_R_GRAB_TRY ||
+						_EnMotionID == MotionComponent::MOT_L_GRAB_TRY ||
+						_EnMotionID == MotionComponent::MOT_R_GRAB_SUC ||
+						_EnMotionID == MotionComponent::MOT_L_GRAB_SUC);
+					if (_BulletF == FALSE && HitCnt <= 1 && (_InvFlag == FALSE || enemyGrabAttack)) { 
 						_EnShock = enemy.at[j].shock;
 						_Damage = (abs(_PlayerNo*100-(float)GetScene()->GetTension())/100* enemy.at[j].damage1+
 						abs((1 - _PlayerNo) *100 - (float)GetScene()->GetTension()) / 100 * enemy.at[j].damage2);
@@ -676,7 +740,7 @@ void PlayerClass::MotionUpdate()
 							type = 2 + 1 - _PlayerNo;
 						}
 						if (enID == MotionComponent::MOT_R_GRAB_SUC || enID == MotionComponent::MOT_L_GRAB_SUC) {
-							if (scene->GetTension() == 100 * (1-_PlayerNo)) { _Damage = _TensionScale; }
+							if (scene->GetPlayerTension(_PlayerNo) <= 0) { _Damage = _TensionScale; }
 						}
 
 						if (GetFrame().type < 40000) {
@@ -710,13 +774,17 @@ void PlayerClass::MotionUpdate()
 void PlayerClass::DamageUpdate()
 {
 		int EnDamage = GetScene()->GetPlayer(1 - _PlayerNo)->_Damage;
+		bool enemyGrabAttack = (_EnMotionID == MotionComponent::MOT_R_GRAB_TRY ||
+			_EnMotionID == MotionComponent::MOT_L_GRAB_TRY ||
+			_EnMotionID == MotionComponent::MOT_R_GRAB_SUC ||
+			_EnMotionID == MotionComponent::MOT_L_GRAB_SUC);
 
-	if (_InvFlag == TRUE) { 
+	if (_InvFlag == TRUE && enemyGrabAttack == FALSE) { 
 		_Damage = 0;
 		return; 
 	}
 	if (_Damage>0) {
-		if (GetFrame().type >= 40000) { 
+		if (GetFrame().type >= 40000 && enemyGrabAttack == FALSE) { 
 			if (GetFrame().type < 50000 && _JGFlag ==FALSE) {
 				_JGFlag = TRUE;
 				_InvFlag = TRUE;
@@ -765,7 +833,12 @@ void PlayerClass::DamageUpdate()
 					SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 				}
 				else {
-					GetScene()->GetPlayer(1 - _PlayerNo)->SetMotionID(MotionComponent::MOT_R_GRAB_SUC + GetScene()->GetPlayer(1 - _PlayerNo)->GetMotionID() % 2);
+					if (GetScene()->GetPlayerTension(0) + GetScene()->GetPlayerTension(1) == 100) {
+						SetMotionID(MotionComponent::MOT_R_DAMAGE + _EnArrow);
+					}
+					else {
+						GetScene()->GetPlayer(1 - _PlayerNo)->SetMotionID(MotionComponent::MOT_R_GRAB_SUC + GetScene()->GetPlayer(1 - _PlayerNo)->GetMotionID() % 2);
+					}
 				}
 			}
 
@@ -1045,7 +1118,9 @@ void PlayerClass::DamageUpdate()
 			}
 			else if (_EnMotionID == MotionComponent::MOT_R_GRAB_TRY ||
 				_EnMotionID == MotionComponent::MOT_L_GRAB_TRY) {
-				GetScene()->GetPlayer(1 - _PlayerNo)->SetMotionID(MotionComponent::MOT_R_GRAB_SUC + (GetScene()->GetPlayer(1 - _PlayerNo)->GetMotionID() % 2));
+				if (GetScene()->GetPlayerTension(0) + GetScene()->GetPlayerTension(1) != 100) {
+					GetScene()->GetPlayer(1 - _PlayerNo)->SetMotionID(MotionComponent::MOT_R_GRAB_SUC + (GetScene()->GetPlayer(1 - _PlayerNo)->GetMotionID() % 2));
+				}
 				SetMotionID(MotionComponent::MOT_R_DAMAGE + _EnArrow);
 					ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, _Damage);
 			}
@@ -1080,7 +1155,7 @@ void PlayerClass::SetMove(VECTOR move)
 		_Move.x = (int)move.x;
 		if (_MotionID >= MotionComponent::MOT_R_STEP_SUC &&
 			_MotionID <= MotionComponent::MOT_L_STEP_FAIL) {
-			if (GetScene()->GetTension() == (1 - _PlayerNo) * 100) {
+			if (GetScene()->GetPlayerTension(_PlayerNo) <= 0) {
 				_Move.x /= 2;
 			}
 		}

@@ -6,6 +6,8 @@ SceneBase::SceneBase()
 	:_IsUpdate(true)
 	,_UpdatingActors(false)
 {
+	_Tension[0] = 50;
+	_Tension[1] = 50;
 }
 
 SceneBase::SceneBase(Main* main)
@@ -13,6 +15,8 @@ SceneBase::SceneBase(Main* main)
 	, _UpdatingActors(false)
 	,_Main(main)
 {
+	_Tension[0] = 50;
+	_Tension[1] = 50;
 	_CommonData = CommonDataClass::GetInstance();
 }
 
@@ -121,9 +125,29 @@ void SceneBase::RemoveLight(LightingComponent* light)
 
 void SceneBase::ChangeTension(int tension)
 {
-	_Tension += tension;
-	if (_Tension > 100) { _Tension = 100; }
-	if (_Tension < 0) { _Tension = 0; }
+	SetTension(_Tension[0] - tension, _Tension[1] + tension);
+}
+
+void SceneBase::ChangePlayerTension(int playerNo, int tension)
+{
+	if (playerNo < 0 || playerNo > 1) {
+		return;
+	}
+
+	_Tension[playerNo] += tension;
+	if (_Tension[playerNo] > 100) { _Tension[playerNo] = 100; }
+	if (_Tension[playerNo] < 0) { _Tension[playerNo] = 0; }
+}
+
+void SceneBase::SetTension(int player1, int player2)
+{
+	if (player1 < 0) { player1 = 0; }
+	if (player1 > 100) { player1 = 100; }
+	if (player2 < 0) { player2 = 0; }
+	if (player2 > 100) { player2 = 100; }
+
+	_Tension[0] = player1;
+	_Tension[1] = player2;
 }
 
 void SceneBase::SetNextScene(SceneType n)

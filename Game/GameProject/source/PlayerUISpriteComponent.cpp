@@ -59,12 +59,8 @@ PlayerUISpriteComponent::~PlayerUISpriteComponent()
 void PlayerUISpriteComponent::Draw()
 {
 	int DrawHeight = 29 ;
-	// The life bar visuals now mirror the shared tension gauge instead of per-player HP.
-	float tension = (float)_Owner->GetScene()->GetTension() / 100.0f;
-	float ratio = tension;
-	if (_Player->GetPlayerNo() == 0) {
-		ratio = 1.0f - tension;
-	}
+	// The life bar visuals now mirror the per-player zero-sum tension values.
+	float ratio = (float)_Owner->GetScene()->GetPlayerTension(_Player->GetPlayerNo()) / 100.0f;
 	float tmp = (DrawEnd - DrawStart) * ratio + DrawStart;
 	if (_Player->GetPlayerNo() == 1) {
 		DrawTurnGraph(DrawEnd-35, DrawHeight-40, HPFrame, TRUE);

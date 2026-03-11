@@ -18,9 +18,9 @@ void AILerningProcessComponent::Update() {
 void AILerningProcessComponent::GetSituation() {
 	// ƒ‰ƒ“ƒ_ƒ€‚ÅŽæ“¾‚Å‚«‚È‚­‚·‚é
 	_CurrentSituation.distance = VSub(_CPUPlayer->GetPosition(), _Enemy->GetPosition());
-	// AI now reads gauge state instead of removed HP values.
-	_CurrentSituation.gauge[0] = _Owner->GetScene()->GetTension();
-	_CurrentSituation.gauge[1] = 100 - _Owner->GetScene()->GetTension();
+	// AI now reads per-player gauge state instead of removed HP values.
+	_CurrentSituation.gauge[0] = _Owner->GetScene()->GetPlayerTension(0);
+	_CurrentSituation.gauge[1] = _Owner->GetScene()->GetPlayerTension(1);
 //	_CurrentSituation.firstNote = 
 	_CurrentSituation.tention = _Owner->GetScene()->GetTension();
 }

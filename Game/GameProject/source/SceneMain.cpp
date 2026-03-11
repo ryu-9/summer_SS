@@ -10,13 +10,19 @@
 
 namespace {
 
-// Round winner is now derived from the shared tension gauge.
-int GetRoundWinnerFromTension(int tension)
+// Round winner is now derived from the per-player tension gauges.
+int GetRoundWinnerFromTension(int player1Tension, int player2Tension)
 {
-	if (tension < 50) {
+	if (player1Tension <= 0 && player2Tension > 0) {
+		return 1;
+	}
+	if (player2Tension <= 0 && player1Tension > 0) {
 		return 0;
 	}
-	if (tension > 50) {
+	if (player1Tension > player2Tension) {
+		return 0;
+	}
+	if (player2Tension > player1Tension) {
 		return 1;
 	}
 	return -1;
@@ -73,7 +79,7 @@ SceneMain::SceneMain(class Main* main)
 		std::swap(_Actors[0], _Actors[5]);
 	}
 	
-	_Tension = 100/2;
+	SetTension(50, 50);
 	_Stage = new StageBase(this, VGet(0, GROUND_HEIGHT-115, 0), VGet(4200, 125, 1), "res/stage/light_land.png", 1, 0);
 	new StageBase(this, VGet(0, GROUND_HEIGHT + 825, 0), VGet(3600, 2000, 1), "res/stage/stage.png", 4, 90, 0, 180 / 4);
 	new StageBase(this, VGet(0, -SCREEN_H / 4, 0), VGet(SCREEN_W * 4, SCREEN_H * 4, 0), "res/stage/dark.png",1,110);
@@ -118,7 +124,7 @@ SceneMain::~SceneMain() {
 void SceneMain::Init(){
 	_Player[0]->Init();
 	_Player[1]->Init();
-	_Tension = 100/2;
+	SetTension(50, 50);
 	_FinishFlag = FALSE;
 	_SceneFlag = 1;
 	_Cnt = 0;
@@ -162,7 +168,7 @@ void SceneMain::Update()
 		_Player[1]->SetSlowFlag(_Cnt % 10 + 1);
 		ChangeVolumeSoundMem((1 - (GetNowCount()-_Cnt)/ 4000 )  * 150, _Psy->GetBGMHandle());
 		if (_Cnt+4000 < GetNowCount()) {
-			AddWinnerEffect(_EFControl, GetRoundWinnerFromTension(GetTension()), 100);
+			AddWinnerEffect(_EFControl, GetRoundWinnerFromTension(GetPlayerTension(0), GetPlayerTension(1)), 100);
 			_SceneFlag = 1;
 			_Cnt = 0;
 			_Player[0]->SetState(_Player[0]->eActive);
@@ -202,7 +208,7 @@ void SceneMain::Update()
 	case 5:
 		if (_Cnt == 0) { _Cnt = GetNowCount() + 2000; }
 		if (GetNowCount()>_Cnt) {
-			AddWinnerEffect(_EFControl, GetRoundWinnerFromTension(GetTension()), 250);
+			AddWinnerEffect(_EFControl, GetRoundWinnerFromTension(GetPlayerTension(0), GetPlayerTension(1)), 250);
 			_SceneFlag = 1;
 			_Player[0]->SetState(_Player[0]->eActive);
 			_Player[1]->SetState(_Player[1]->eActive);
@@ -214,15 +220,15 @@ void SceneMain::Update()
 	_BattleCnt--;
 	_FinishFlag = FALSE;
 	int sceneFlag = 2;
-	// Reaching either end of the tension gauge ends the round immediately.
-	if (GetTension() <= 0 || GetTension() >= 100) { _FinishFlag = TRUE; }
+	// Reaching zero tension on either side ends the round immediately.
+	if (GetPlayerTension(0) <= 0 || GetPlayerTension(1) <= 0) { _FinishFlag = TRUE; }
 	if (_BattleCnt <= 0) {
 		_FinishFlag = TRUE;
 		sceneFlag = 5;
 	}
 
 	if (_FinishFlag == TRUE&&_SceneFlag==0) {
-		int winner = GetRoundWinnerFromTension(GetTension());
+		int winner = GetRoundWinnerFromTension(GetPlayerTension(0), GetPlayerTension(1));
 		if (winner == 0) {
 			_WinNum[0] +=20;
 		}

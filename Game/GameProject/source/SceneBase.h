@@ -52,8 +52,11 @@ public:
 	void SetIsUpdate(const bool flag) { _IsUpdate = flag; };
 
 	FPSControlClass* GetFPSCon() { return _FPSCon; };
-	int GetTension() { return _Tension; }
+	int GetTension() { return _Tension[1]; }
+	int GetPlayerTension(int playerNo) { return _Tension[playerNo]; }
 	void ChangeTension(int tension);
+	void ChangePlayerTension(int playerNo, int tension);
+	void SetTension(int player1, int player2);
 	int GetScreenMask() { return ScreenMask; }
 	int GetSubMask() { return SubMask; }
 	SceneType GetNextScene() const { return _NextScene; }
@@ -93,7 +96,7 @@ protected:
 	FPSControlClass* _FPSCon;
 
 	//テンションゲージ管理用
-	int _Tension;
+	int _Tension[2];
 	CommonDataClass* _CommonData;
 	int ScreenMask;
 	int SubMask;
