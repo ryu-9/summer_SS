@@ -18,8 +18,9 @@ void AILerningProcessComponent::Update() {
 void AILerningProcessComponent::GetSituation() {
 	// ƒ‰ƒ“ƒ_ƒ€‚ÅŽæ“¾‚Å‚«‚È‚­‚·‚é
 	_CurrentSituation.distance = VSub(_CPUPlayer->GetPosition(), _Enemy->GetPosition());
-	_CurrentSituation.hp[0] = _CPUPlayer->GetHitPoint();
-	_CurrentSituation.hp[1] = _Enemy->GetHitPoint();
+	// AI now reads gauge state instead of removed HP values.
+	_CurrentSituation.gauge[0] = _Owner->GetScene()->GetTension();
+	_CurrentSituation.gauge[1] = 100 - _Owner->GetScene()->GetTension();
 //	_CurrentSituation.firstNote = 
 	_CurrentSituation.tention = _Owner->GetScene()->GetTension();
 }
@@ -55,4 +56,5 @@ void AILerningProcessComponent::CreateInputKey() {
 		break;
 	}
 }
+
 

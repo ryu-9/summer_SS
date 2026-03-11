@@ -29,7 +29,6 @@ public:
 	int GetPlayerNo() const { return _PlayerNo; };
 	int GetNotesType() const { return _NoteType; };
 	void SetNotesType(const int ntype) { _NoteType = ntype; }
-	int GetHitPoint() const { return _HP; }
 	bool GetMotTrgFlag() const { return _MotTrgFlag; }
 	MotionComponent* GetMotionCopmponent() { return mc; }
 	MOTION_FRAME GetFrame(int i = 0) ;
@@ -37,7 +36,6 @@ public:
 	void MotionUpdate();
 	void DamageUpdate();
 	int GetDamage() const { return _Damage; }
-	int GetMaxHp() const { return _MaxHp; }
 	MOTION_FRAME GetHitFrame() { return _HitFrame; }
 	VECTOR GetHitPosition() { return _HitPosition; }
 	VECTOR GetDrawPosition() const { return _DrawPosition; }
@@ -71,11 +69,10 @@ private:
 	int _Damage;		//ダメージ保留場所
 	bool _BulletF;		//玉やられフラグ
 	int _NoteType;
-	int _HP;
 	bool _MotTrgFlag;
 	bool IsCPU;
 	int _StopFrameCnt;
-	int _MaxHp;
+	int _TensionScale;
 	MOTION_FRAME _HitFrame;
 	VECTOR _HitPosition;
 	VECTOR _DrawPosition;

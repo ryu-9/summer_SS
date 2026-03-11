@@ -8,8 +8,37 @@
 #include "MainSpriteComponent.h"
 #include "AIControlClass.h"
 
+namespace {
 
+// Round winner is now derived from the shared tension gauge.
+int GetRoundWinnerFromTension(int tension)
+{
+	if (tension < 50) {
+		return 0;
+	}
+	if (tension > 50) {
+		return 1;
+	}
+	return -1;
+}
 
+void AddWinnerEffect(EffectControlClass* effectControl, int winner, int offset)
+{
+	if (winner == 0) {
+		effectControl->AddScreenEffect(VGet(SCREEN_W / 2 - 1000, SCREEN_H / 2, 0), 11);
+		return;
+	}
+	if (winner == 1) {
+		effectControl->AddScreenEffect(VGet(SCREEN_W / 2 + 1000, SCREEN_H / 2, 0), 12);
+		return;
+	}
+
+	effectControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 13);
+	effectControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - offset, SCREEN_H / 2, 0), 14);
+	effectControl->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + offset, SCREEN_H / 2, 0), 15);
+}
+
+}
 
 SceneMain::SceneMain(class Main* main)
 	:SceneBase(main)
@@ -19,6 +48,8 @@ SceneMain::SceneMain(class Main* main)
 	,_Color(0)
 	,_AI(nullptr)
 {
+	_WinNum[0] = 0;
+	_WinNum[1] = 0;
 	SetFontSize(16);
 	CreateMaskScreen();
 	_HPRatio[0] = 0;
@@ -60,8 +91,7 @@ SceneMain::SceneMain(class Main* main)
 	_BackLight[0] = new BackLightClass(this, 0);
 	_BackLight[1] = new BackLightClass(this, 1);
 	_SEControl = new SoundManager();
-	SetUseMaskScreenFlag(FALSE);		//お守り
-
+	SetUseMaskScreenFlag(FALSE);
 
 	_EFControl->AddScreenEffect(VGet(SCREEN_W/2,SCREEN_H/2,0), 16);
 	
@@ -72,8 +102,6 @@ SceneMain::SceneMain(class Main* main)
 	sndManager.AddSound(new SoundItemSE("res/sound/se/kick_guide.wav", "guide"));
 	sndManager.AddSound(new SoundItemSE("res/sound/se/ラウンド開演.m4a", "start"));
 	sndManager.AddSound(new SoundItemSE("res/sound/se/終焉.m4a", "end"));
-
-
 }
 
 SceneMain::~SceneMain() {
@@ -88,12 +116,10 @@ SceneMain::~SceneMain() {
 }
 
 void SceneMain::Init(){
-
 	_Player[0]->Init();
 	_Player[1]->Init();
 	_Tension = 100/2;
 	_FinishFlag = FALSE;
-	//_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 1);
 	_SceneFlag = 1;
 	_Cnt = 0;
 	_Psy->Init();
@@ -111,28 +137,20 @@ void SceneMain::Init(){
 	_EFControl->Init();
 }
 
-
-
-
 void SceneMain::Update() 
 {
-	if (_FPSCon->GetUpdateFlag() == TRUE) {
-	}
-
 	switch (_SceneFlag) {
 	case 0:
 		_Cnt = _FPSCon->GetSession();
 		_Player[0]->SetSlowFlag(_Cnt);
 		_Player[1]->SetSlowFlag(_Cnt);
 		break;
-
-
 	case 2:
 		if (_Cnt == 0) { _Cnt = GetNowCount() + 1000; }
 		_Player[0]->SetState(_Player[0]->ePaused);
 		_Player[1]->SetState(_Player[1]->ePaused);
 		if (GetNowCount() >_Cnt) {
-			_SceneFlag = 3; 
+			_SceneFlag = 3;
 			_Cnt = GetNowCount();
 			_Player[0]->SetState(_Player[0]->eActive);
 			_Player[1]->SetState(_Player[1]->eActive);
@@ -143,23 +161,8 @@ void SceneMain::Update()
 		_Player[0]->SetSlowFlag(_Cnt % 10 + 1);
 		_Player[1]->SetSlowFlag(_Cnt % 10 + 1);
 		ChangeVolumeSoundMem((1 - (GetNowCount()-_Cnt)/ 4000 )  * 150, _Psy->GetBGMHandle());
-		if (_Cnt % 5 != 0) {
-		}
-		if (_Cnt+4000 < GetNowCount()) { 
-			if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() > _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 1000, SCREEN_H / 2, 0), 11);
-				//1P勝利
-			}
-			else if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() < _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 1000, SCREEN_H / 2, 0), 12);
-				//1P勝利
-			}
-			else {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 13);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 100, SCREEN_H / 2, 0), 14);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + 100, SCREEN_H / 2, 0), 15);
-				//引き分け
-			}
+		if (_Cnt+4000 < GetNowCount()) {
+			AddWinnerEffect(_EFControl, GetRoundWinnerFromTension(GetTension()), 100);
 			_SceneFlag = 1;
 			_Cnt = 0;
 			_Player[0]->SetState(_Player[0]->eActive);
@@ -167,11 +170,8 @@ void SceneMain::Update()
 			StopSoundMem(_Psy->GetBGMHandle());
 		}
 		break;
-
 	case 4:
-
 		if (_WinNum[0]>=40) {
-			//Player1 Win!!
 			if (_CommonData->_IsDuoMode == false && _CommonData->_WinnerPlayerNum == 0) {
 				_CommonData->_WinningStreak++;
 			}
@@ -179,13 +179,11 @@ void SceneMain::Update()
 				_CommonData->_WinningStreak = 4;
 			}
 			_CommonData->_WinnerPlayerNum = 1;
-			
 			_NextScene = SceneType::eDialogue;
 			SetChangeFlag(TRUE);
 			return;
 		}
 		if (_WinNum[1] >= 40) {
-			//Player2 Win!!
 			_CommonData->_WinningStreak = 4;
 			_CommonData->_WinnerPlayerNum = 2;
 			_NextScene = SceneType::eDialogue;
@@ -193,70 +191,47 @@ void SceneMain::Update()
 			return;
 		}
 		if (_WinNum[0] + _WinNum[1] > 40) {
-			//Draw!!
 			_CommonData->_WinningStreak = 4;
 			_CommonData->_WinnerPlayerNum = -1;
 			_NextScene = SceneType::eEnding;
 			SetChangeFlag(TRUE);
 			return;
 		}
-
 		Init();
-		_HPRatio[0] += _Player[0]->GetHitPoint() / _Player[0]->GetMaxHp();
-		_HPRatio[1] += _Player[0]->GetHitPoint() / _Player[1]->GetMaxHp();
 		break;
-
 	case 5:
-		if (_Cnt == 0) { _Cnt = GetNowCount() + 2000;  }
+		if (_Cnt == 0) { _Cnt = GetNowCount() + 2000; }
 		if (GetNowCount()>_Cnt) {
-			if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() > _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 1000, SCREEN_H / 2, 0), 11);
-				//1P勝利
-			}
-			else if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() < _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 1000, SCREEN_H / 2, 0), 12);
-				//1P勝利
-			}
-			else {
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2, SCREEN_H / 2, 0), 13);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 250, SCREEN_H / 2, 0), 14);
-				_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 + 616 / 2 + 250, SCREEN_H / 2, 0), 15);
-				//引き分け
-			}
+			AddWinnerEffect(_EFControl, GetRoundWinnerFromTension(GetTension()), 250);
 			_SceneFlag = 1;
 			_Player[0]->SetState(_Player[0]->eActive);
 			_Player[1]->SetState(_Player[1]->eActive);
-			
 			DeleteSoundMem(_Psy->GetBGMHandle());
 		}
 		break;
-
 	}
 
 	_BattleCnt--;
 	_FinishFlag = FALSE;
 	int sceneFlag = 2;
-	if (_Player[0]->GetHitPoint() <= 0) { _FinishFlag = TRUE; }
-	if (_Player[1]->GetHitPoint() <= 0) { _FinishFlag = TRUE; }
-	if (_BattleCnt <= 0) { 
+	// Reaching either end of the tension gauge ends the round immediately.
+	if (GetTension() <= 0 || GetTension() >= 100) { _FinishFlag = TRUE; }
+	if (_BattleCnt <= 0) {
 		_FinishFlag = TRUE;
 		sceneFlag = 5;
 	}
 
-
 	if (_FinishFlag == TRUE&&_SceneFlag==0) {
-		if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() > _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
+		int winner = GetRoundWinnerFromTension(GetTension());
+		if (winner == 0) {
 			_WinNum[0] +=20;
-			//1P勝利
 		}
-		else if (_Player[0]->GetHitPoint() * _Player[1]->GetMaxHp() < _Player[1]->GetHitPoint() * _Player[0]->GetMaxHp()) {
+		else if (winner == 1) {
 			_WinNum[1] +=20;
-			//1P勝利
 		}
 		else {
 			_WinNum[0] += 7;
 			_WinNum[1] += 7;
-			//引き分け
 		}
 		_SceneFlag = sceneFlag;
 		_EFControl->AddScreenEffect(VGet(SCREEN_W / 2 - 616 / 2 - 100, SCREEN_H / 2, 0), 6);
@@ -265,9 +240,6 @@ void SceneMain::Update()
 		sndManager.GetSound("end")->Play();
 	}
 
-
-
-
 	SceneBase::Update();
 
 	if (_FPSCon->GetUpdateFlag() == FALSE) { return; }
@@ -275,16 +247,12 @@ void SceneMain::Update()
 	_Player[1]->MotionUpdate();
 	_Player[0]->DamageUpdate();
 	_Player[1]->DamageUpdate();
-
-
-
 }
 
 void SceneMain::Draw() {
 	SceneBase::Draw();
 	return;
 
-	// デバッグ用の当たり判定描画
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 125);
 	for (int i = 0; i < 2; i++) {
 		auto atbox = _Player[i]->GetFrame().at;
@@ -299,13 +267,10 @@ void SceneMain::Draw() {
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 }
 
-
-
-
 int SceneMain::SceneEnd() {
-	
 	return 0;
 }
+
 bool SceneMain::GetGameSet()
 {
 	if (_WinNum[0] >= 40 || _WinNum[1] >= 40 || _WinNum[0] + _WinNum[1] > 40) {
@@ -314,4 +279,3 @@ bool SceneMain::GetGameSet()
 	return false;
 }
 ;
-

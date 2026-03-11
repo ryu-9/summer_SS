@@ -10,6 +10,49 @@
 #include "SoundManager.h"
 #include "SoundItem.h"
 
+namespace {
+
+// A player loses once the shared tension gauge is pushed fully to the opponent side.
+bool IsTensionDefeated(SceneBase* scene, int playerNo)
+{
+	if (playerNo == 0) {
+		return scene->GetTension() >= 100;
+	}
+	return scene->GetTension() <= 0;
+}
+
+// Old HP-sized damage values are converted into tension movement using the per-character scale.
+int ConvertHpDeltaToTension(int hpDelta, int maxHp)
+{
+	if (hpDelta == 0 || maxHp <= 0) {
+		return 0;
+	}
+
+	int amount = abs(hpDelta) * 100;
+	amount = (amount + maxHp - 1) / maxHp;
+	if (amount <= 0) {
+		amount = 1;
+	}
+	return amount;
+}
+
+// Negative hpDelta means taking damage, positive hpDelta means recovering ground.
+void ApplyTensionForHpDelta(SceneBase* scene, int playerNo, int maxHp, int hpDelta)
+{
+	int tensionDelta = ConvertHpDeltaToTension(hpDelta, maxHp);
+	if (tensionDelta == 0) {
+		return;
+	}
+
+	int direction = playerNo * 2 - 1;
+	if (hpDelta < 0) {
+		scene->ChangeTension(-tensionDelta * direction);
+		return;
+	}
+	scene->ChangeTension(tensionDelta * direction);
+}
+
+}
 
 PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 	:ActorClass(scene)
@@ -22,7 +65,7 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 	,_MotTrgFlag(FALSE)
 	, IsCPU(No)
 	, _StopFrameCnt(0)
-	, _MaxHp(1000)
+	, _TensionScale(1000) // Legacy max HP reused as a tension conversion scale.
 	,_StunTime(0)
 	,_InvFlag(FALSE)
 	,_SACnt(0)
@@ -34,12 +77,11 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 	//,_MotChangeF(0)
 {
 
-	_HP = _MaxHp;
 
 	int EnType = GetScene()->GetCommonData()->_PlayerSelectChara[1 - _PlayerNo];
 	switch (type) {
 	case 0:
-		_MaxHp = 1000;
+		_TensionScale = 1000;
 		switch (EnType) {
 		//case 0:
 			//_Color = GetColor(110, 27, 255);
@@ -62,7 +104,7 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 		}
 		break;
 	case 1:
-		_MaxHp = 1000;
+		_TensionScale = 1000;
 		switch (EnType) {
 		case 0:
 			_Color = GetColor(255, 181, 48);
@@ -85,7 +127,7 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 		}
 		break;
 	case 2:
-		_MaxHp = 1000;
+		_TensionScale = 1000;
 		switch (EnType) {
 		case 0:
 			_Color = GetColor(26,189,195);
@@ -108,7 +150,7 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 		}
 		break;
 	case 3:
-		_MaxHp = 1150;
+		_TensionScale = 1150;
 		switch (EnType) {
 		case 0:
 			_Color = GetColor(232,144,255);
@@ -131,7 +173,7 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 		}
 		break;
 	case 4:
-		_MaxHp = 650;
+		_TensionScale = 650;
 		switch (EnType) {
 		case 0:
 			_Color = GetColor(167,12,18);
@@ -154,12 +196,12 @@ PlayerClass::PlayerClass(SceneBase* scene, bool No, int type)
 		}
 		break;
 	case 5:
-		_MaxHp = 1150;
+		_TensionScale = 1150;
 		_Color = GetColor(78,87,182);
 		break;
 	}
 
-	_MaxHp *= 2;
+	_TensionScale *= 2;
 	std::string path = "res/chara0";
 	path += std::to_string(_Type) + "/";
 	// モーションデータのロード
@@ -365,7 +407,6 @@ void PlayerClass::Init()
 	_BulletF = FALSE;
 	_MotTrgFlag = FALSE;
 	_StopFrameCnt = 0;
-	_HP = _MaxHp;
 	_StunTime = 0;
 	//_InvFlag = FALSE;
 	_SACnt = 0;
@@ -408,7 +449,6 @@ void PlayerClass::SetMotionID(const int motionid, bool flag)
 	 if (_MotionID == MotionComponent::MOT_R_DAMAGE_RISE ||
 		 _MotionID == MotionComponent::MOT_L_DAMAGE_RISE) {
 		 if (_Type == 5) {
-			 _HP = _MaxHp;
 		 } 
 	 }
 
@@ -426,7 +466,7 @@ void PlayerClass::SetMotionID(const int motionid, bool flag)
 
 
 
-	 if (_HP <= 0) {
+	 if (IsTensionDefeated(GetScene(), _PlayerNo)) {
 		 _StunTime = 0;
 		 if (motionid == MotionComponent::MOT_R_DAMAGE) {
 			 _MotionID = MotionComponent::MOT_R_DAMAGE_FLY;
@@ -560,7 +600,7 @@ bool PlayerClass::FrameProcess()
 			sndManager.GetSound(std::to_string(_Type) + std::to_string(tmp))->Play();
 		}
 	}
-	if (_HP <= 0) {
+	if (IsTensionDefeated(GetScene(), _PlayerNo)) {
 		if (_MotionID == MotionComponent::MOT_L_DAMAGE_RISE ||
 			_MotionID == MotionComponent::MOT_R_DAMAGE_RISE) {
 			if (_FrameCnt > 5) {
@@ -636,7 +676,7 @@ void PlayerClass::MotionUpdate()
 							type = 2 + 1 - _PlayerNo;
 						}
 						if (enID == MotionComponent::MOT_R_GRAB_SUC || enID == MotionComponent::MOT_L_GRAB_SUC) {
-							if (scene->GetTension() == 100 * (1-_PlayerNo)) { _Damage = _MaxHp; }
+							if (scene->GetTension() == 100 * (1-_PlayerNo)) { _Damage = _TensionScale; }
 						}
 
 						if (GetFrame().type < 40000) {
@@ -732,7 +772,7 @@ void PlayerClass::DamageUpdate()
 			else {
 				if (_MotionID == MotionComponent::MOT_R_GRAB_TRY ||			//掴み攻撃の時
 					_MotionID == MotionComponent::MOT_L_GRAB_TRY) {
-					_HP -= _Damage;
+					ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, -_Damage);
 					if (_EnMotionID >= MotionComponent::MOT_R_ATTACK1_STAND &&			//相手が言葉攻撃の時
 						_EnMotionID <= MotionComponent::MOT_L_ATTACK1_CROUCH_COMBO) {
 						SetMotionID(MotionComponent::MOT_R_DAMAGE + _EnArrow);
@@ -745,7 +785,7 @@ void PlayerClass::DamageUpdate()
 					if (_EnMotionID >= MotionComponent::MOT_R_ATTACK1_STAND		//相手も言葉攻撃
 						&& _EnMotionID <= MotionComponent::MOT_L_ATTACK1_CROUCH_COMBO) {
 						if (_Damage > EnDamage) {
-							_HP += EnDamage - _Damage;					//差分ダメージ、ノーツ失敗時ひるみ
+								ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, EnDamage - _Damage);					//差分ダメージ、ノーツ失敗時ひるみ
 						}
 						if (GetNotesType() == -1) {
 							switch (_MotionID) {
@@ -775,7 +815,6 @@ void PlayerClass::DamageUpdate()
 					}
 					if (_EnMotionID >= MotionComponent::MOT_R_ATTACK2_STAND_SUC		//相手は成功弦攻撃の時
 						&& _EnMotionID <= MotionComponent::MOT_L_ATTACK2_COMBO2_SUC) {
-						_HP -= _Damage;									//そのままのダメージ、吹っ飛び
 						SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 						if (GetScene()->GetPlayer(1 - _PlayerNo)->GetNotesType() != -1) {
 							GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
@@ -789,7 +828,7 @@ void PlayerClass::DamageUpdate()
 						&& _EnMotionID <= MotionComponent::MOT_L_ATTACK2_COMBO2_FAIL) {
 
 						if (_Damage > EnDamage) {
-							_HP += EnDamage - _Damage;					//差分ダメージ、怯みモーション
+								ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, EnDamage - _Damage);					//差分ダメージ、怯みモーション
 						}
 						switch (_MotionID) {
 						case MotionComponent::MOT_R_CROUCH:
@@ -825,14 +864,14 @@ void PlayerClass::DamageUpdate()
 						}
 						else {
 						if (GetScene()->GetPlayer(1 - _PlayerNo)->GetSACnt() > 0) {
-							_HP -= _Damage;
+									ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, -_Damage);
 							SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 							//return;
 						}
 
 							else {
 						if (_Damage > EnDamage) {
-							_HP += EnDamage - _Damage;					//差分ダメージ
+									ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, EnDamage - _Damage);					//差分ダメージ
 						}
 						if (GetNotesType() == -1) {
 							SetMotionID(MotionComponent::MOT_R_DAMAGE + _EnArrow);
@@ -851,12 +890,11 @@ void PlayerClass::DamageUpdate()
 					if (_EnMotionID >= MotionComponent::MOT_R_ATTACK1_STAND		//相手は言攻撃
 						&& _EnMotionID <= MotionComponent::MOT_L_ATTACK1_CROUCH_COMBO) {
 						if (_Damage > EnDamage) {
-							_HP += EnDamage - _Damage;					//差分ダメージ、モーション変更なし
+									ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, EnDamage - _Damage);					//差分ダメージ、モーション変更なし
 						}
 					}
 						if (_EnMotionID >= MotionComponent::MOT_R_ATTACK2_STAND_SUC		//相手は成功弦攻撃の時
 							&& _EnMotionID <= MotionComponent::MOT_L_ATTACK2_COMBO2_SUC) {
-							_HP -= _Damage;									//そのままのダメージ、吹っ飛び
 							SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 						if (GetScene()->GetPlayer(1 - _PlayerNo)->GetNotesType() != -1) {
 							GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
@@ -876,7 +914,7 @@ void PlayerClass::DamageUpdate()
 						}
 						else {
 							if (GetScene()->GetPlayer(1 - _PlayerNo)->GetSACnt() > 0) {
-								_HP -= _Damage;
+											ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, -_Damage);
 								SetMotionID(MotionComponent::MOT_R_DAMAGE + _EnArrow);
 								//return;
 							}
@@ -884,7 +922,7 @@ void PlayerClass::DamageUpdate()
 
 							else {
 							if (_Damage > EnDamage) {
-								_HP += EnDamage - _Damage;					//差分ダメージ、モーション変更なし
+										ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, EnDamage - _Damage);					//差分ダメージ、モーション変更なし
 							}
 							if (GetNotesType() == -1) {
 								switch (_MotionID) {
@@ -920,7 +958,7 @@ void PlayerClass::DamageUpdate()
 		}
 		else {					//相打ちじゃないとき
 
-			_HP -= _Damage;		//HPを減らす
+			ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, -_Damage);		//HPを減らす
 
 
 			if (_MotionID >= MotionComponent::MOT_R_DAMAGE && _MotionID <= MotionComponent::MOT_L_DAMAGE_FLY) {
@@ -1009,13 +1047,13 @@ void PlayerClass::DamageUpdate()
 				_EnMotionID == MotionComponent::MOT_L_GRAB_TRY) {
 				GetScene()->GetPlayer(1 - _PlayerNo)->SetMotionID(MotionComponent::MOT_R_GRAB_SUC + (GetScene()->GetPlayer(1 - _PlayerNo)->GetMotionID() % 2));
 				SetMotionID(MotionComponent::MOT_R_DAMAGE + _EnArrow);
-				_HP += _Damage;
+					ApplyTensionForHpDelta(GetScene(), _PlayerNo, _TensionScale, _Damage);
 			}
 
 			}
 
 		}
-		if (_HP <= 0) {
+		if (IsTensionDefeated(GetScene(), _PlayerNo)) {
 			SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 		}
 	}
@@ -1055,6 +1093,16 @@ void PlayerClass::SetVolume(int value)
 		_Volume =value;
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

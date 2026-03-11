@@ -18,7 +18,7 @@ private:
 	void CreateInputKey() override;
 	struct PARAMETER {
 		VECTOR distance;
-		int hp[2];
+		int gauge[2];
 		float firstNote;
 		int tention;
 	};
@@ -42,4 +42,5 @@ private:
 //	std::vector<std::vector<AIRuleJudgementBase*>> _Judgement;
 //	std::vector<AIRuleJudgementBase*> _StateJudgement;
 };
+
 
