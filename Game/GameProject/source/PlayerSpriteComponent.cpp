@@ -67,6 +67,11 @@ void PlayerSpriteComponent::Draw(){
 	MyDrawMain(pos, VGet(tmp.w, tmp.h, 0), tmp.cg, _Owner->GetScene()->GetCamera()->GetView(), tmp.rev);
 	SetDrawBright(255, 255, 255);
 
+	VECTOR DrawV = VGet(1920 / 2, GROUND_HEIGHT, 0);	//•`‰æ’†S
+	pos = VTransform(VAdd(pos, VScale(VGet(0, tmp.h, 0), -0.5f)), _Owner->GetScene()->GetCamera()->GetView());
+	pos = VAdd(pos, DrawV);
+	DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "%d", tmp.type);
+
 	//DrawFormatString(_Owner->GetPosition().x, _Owner->GetPosition().y, GetColor(200, 64, 64), "%d", _Player->GetMotionID());
 	SetDrawScreen(_ShadowMask[0]);
 	ClearDrawScreen();

@@ -8797,10 +8797,10 @@
 					],
 					"attackbox": [
 						{
-							"atx": 145,
-							"aty": 193,
-							"atw": 700,
-							"ath": 700,
+							"atx": -800,
+							"aty": -800,
+							"atw": 2800,
+							"ath": 2800,
 							"isrect": 0,
 							"rotate": 0,
 							"damage1": 150,
@@ -8809,10 +8809,10 @@
 							"shocky": -150
 						},
 						{
-							"atx": 145,
-							"aty": 193,
-							"atw": 700,
-							"ath": 700,
+							"atx": -800,
+							"aty": -800,
+							"atw": 2800,
+							"ath": 2800,
 							"isrect": 0,
 							"rotate": 0,
 							"damage1": 150,
@@ -8838,32 +8838,6 @@
 							"isrect": 1,
 							"rotate": 0
 						}
-					],
-					"attackbox": [
-						{
-							"atx": 687,
-							"aty": 193,
-							"atw": 700,
-							"ath": 700,
-							"isrect": 0,
-							"rotate": 0,
-							"damage1": 150,
-							"damage2": 150,
-							"shockx": 70,
-							"shocky": -150
-						},
-						{
-							"atx": 687,
-							"aty": 193,
-							"atw": 700,
-							"ath": 700,
-							"isrect": 0,
-							"rotate": 0,
-							"damage1": 150,
-							"damage2": 150,
-							"shockx": 70,
-							"shocky": -150
-						}
 					]
 				},
 				{
@@ -8881,20 +8855,6 @@
 							"hith": 731,
 							"isrect": 1,
 							"rotate": 0
-						}
-					],
-					"attackbox": [
-						{
-							"atx": 1247,
-							"aty": 193,
-							"atw": 700,
-							"ath": 700,
-							"isrect": 0,
-							"rotate": 0,
-							"damage1": 150,
-							"damage2": 150,
-							"shockx": 70,
-							"shocky": -150
 						}
 					]
 				},

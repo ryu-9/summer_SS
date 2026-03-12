@@ -558,26 +558,26 @@ void PlayerClass::SetMotionID(const int motionid, bool flag)
 		 && motionid <= MotionComponent::MOT_L_ATTACK2_COMBO2_SUC) {
 		 if (motionid == MotionComponent::MOT_R_ATTACK2_JUMP_SUC ||
 			 motionid == MotionComponent::MOT_L_ATTACK2_JUMP_SUC) {
-			 GetScene()->ChangeTension(3 * (_PlayerNo * 2 - 1));
+			 //GetScene()->ChangeTension(3 * (_PlayerNo * 2 - 1));
 		 }
 		 else {
-			 GetScene()->ChangeTension(5 * (_PlayerNo * 2 - 1));
+			 //GetScene()->ChangeTension(5 * (_PlayerNo * 2 - 1));
 	 }
 	 }
 	 if (motionid == MotionComponent::MOT_R_STEP_SUC) {
 		 if (GetPosition().x < GetScene()->GetPlayer(1 - _PlayerNo)->GetPosition().x) {		//NSで相手に近づいたとき
-			 GetScene()->ChangeTension(3 * (_PlayerNo * 2 - 1));				//テンションを増加
+			 //GetScene()->ChangeTension(3 * (_PlayerNo * 2 - 1));				//テンションを増加
 		 }
 		 _SACnt = 255;										//スーパーアーマーを付与
 	 }
 	 if ( motionid == MotionComponent::MOT_L_STEP_SUC) {
 		 if (GetPosition().x > GetScene()->GetPlayer(1 - _PlayerNo)->GetPosition().x) {		//NSで相手に近づいたとき
-			 GetScene()->ChangeTension(3 * (_PlayerNo * 2 - 1));				//テンションを増加
+			 //GetScene()->ChangeTension(3 * (_PlayerNo * 2 - 1));				//テンションを増加
 		 }
 		 _SACnt = 255;										//スーパーアーマーを付与
 	 }
 	 if (motionid == MotionComponent::MOT_R_STEP_FAIL || motionid == MotionComponent::MOT_L_STEP_FAIL) {
-		 GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
+		 //GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
 		 _SACnt = 0;
 	 }
 
@@ -754,7 +754,7 @@ void PlayerClass::MotionUpdate()
 						}
 
 					if (GetScene()->GetPlayer(1-_PlayerNo)->GetNotesType()!=-1) {
-						GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
+						//GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
 					}
 				}
 					
@@ -789,7 +789,7 @@ void PlayerClass::DamageUpdate()
 				_JGFlag = TRUE;
 				_InvFlag = TRUE;
 				sndManager.GetSound("justguard")->Play();
-			GetScene()->ChangeTension(10 * (_PlayerNo * 2 - 1));
+			//GetScene()->ChangeTension(10 * (_PlayerNo * 2 - 1));
 			GetScene()->GetFPSCon()->StartSession();
 			_HitPosition = GetPosition();
 			_HitFrame = GetFrame();
@@ -804,6 +804,7 @@ void PlayerClass::DamageUpdate()
 			if (GetFrame().type < 40000 || GetFrame().type >= 50000) {
 				_JGFlag = FALSE;
 			}
+			return;
 		}
 
 		GetScene()->GetPlayer(1 - _PlayerNo)->SetComboFlag(TRUE);
@@ -890,7 +891,7 @@ void PlayerClass::DamageUpdate()
 						&& _EnMotionID <= MotionComponent::MOT_L_ATTACK2_COMBO2_SUC) {
 						SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 						if (GetScene()->GetPlayer(1 - _PlayerNo)->GetNotesType() != -1) {
-							GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
+							//GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
 						}
 						if (_EnMotionID != MotionComponent::MOT_R_ATTACK2_JUMP_SUC &&
 							_EnMotionID != MotionComponent::MOT_L_ATTACK2_JUMP_SUC) {
@@ -970,7 +971,7 @@ void PlayerClass::DamageUpdate()
 							&& _EnMotionID <= MotionComponent::MOT_L_ATTACK2_COMBO2_SUC) {
 							SetMotionID(MotionComponent::MOT_R_DAMAGE_FLY + _EnArrow);
 						if (GetScene()->GetPlayer(1 - _PlayerNo)->GetNotesType() != -1) {
-							GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
+							//GetScene()->ChangeTension(-5 * (_PlayerNo * 2 - 1));
 						}
 							if (_EnMotionID != MotionComponent::MOT_R_ATTACK2_JUMP_SUC &&
 								_EnMotionID != MotionComponent::MOT_L_ATTACK2_JUMP_SUC) {
